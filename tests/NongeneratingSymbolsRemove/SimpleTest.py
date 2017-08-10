@@ -35,14 +35,32 @@ class RuleBto1(Rule):
 
 
 class SimpleTest(TestCase):
-    def test_simpleTest(self):
+    def __init__(self, methodName):
+        super().__init__(methodName)
+        self.g = Grammar()
+
+    def setUp(self):
         g = Grammar(terminals=[0, 1],
                     nonterminals=[A, B, C],
                     rules=[RuleAto0B, RuleBto1])
-        changed = ContextFree.remove_nongenerastingSymbols(g)
+
+    def test_simpleTest(self):
+        changed = ContextFree.remove_nongenerastingSymbols(self.g)
         self.assertTrue(changed.have_term([0, 1]))
         self.assertTrue(changed.have_nonterm([A, B]))
         self.assertFalse(changed.have_nonterm(C))
+
+    def test_simpleTestWithoutChange(self):
+        ContextFree.remove_nongenerastingSymbols(self.g)
+        self.assertTrue(self.g.have_term([0, 1]))
+        self.assertTrue(self.g.have_nonterm([A, B, C]))
+
+    def test_simpleTestWithChange(self):
+        changed = ContextFree.remove_nongenerastingSymbols(self.g, transform_grammar=True)
+        self.assertEqual(id(changed), id(self.g))
+        self.assertTrue(self.g.have_term([0, 1]))
+        self.assertTrue(self.g.have_nonterm([A, B]))
+        self.assertFalse(self.g.have_nonterm(C))
 
 
 if __name__ == '__main__':
