@@ -1,0 +1,20 @@
+language: python
+python:
+  - "3.5"
+
+# command to install dependencies
+install:
+- pip install coverage python-coveralls grammpy
+
+# command to run tests with coverage
+script:
+- coverage run --source=grammpy-transforms -m unittest discover -s tests -p "*Test.py" -q
+
+# report coverage
+after_script:
+- coverage report -m
+- coveralls
+
+# disable email notifications
+notifications:
+  email: false
