@@ -6,3 +6,5 @@
 Part of grammpy-transforms
 
 """
+
+from .nongeneratingSymbolsRemove import remove_nongenerating_symbol

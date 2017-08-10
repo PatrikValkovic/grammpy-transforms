@@ -6,3 +6,5 @@
 Part of grammpy-transforms
 
 """
+
+from .contextfree import ContextFree
