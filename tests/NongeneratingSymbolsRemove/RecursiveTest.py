@@ -60,9 +60,32 @@ class RecursiveTest(TestCase):
 
     def setUp(self):
         self.g = Grammar(terminals=[0, 1],
-                         nonterminals=[A, B],
-                         rules=[RuleAto0B, RuleBto1, RuleCto1D, RuleDto0E, RuleEto0C])
+                         nonterminals=[A, B, C, D, E],
+                         rules=[RuleAto0B, RuleBto1,
+                                RuleCto1D, RuleDto0E,
+                                RuleEto0C])
 
+    def test_recursiveTest(self):
+        changed = ContextFree.remove_nongenerastingSymbols(self.g)
+        self.assertTrue(changed.have_term([0, 1]))
+        self.assertTrue(changed.have_nonterm([A, B]))
+        self.assertFalse(changed.have_nonterm(C))
+        self.assertFalse(changed.have_nonterm(D))
+        self.assertFalse(changed.have_nonterm(E))
+
+    def test_simpleTestWithoutChange(self):
+        ContextFree.remove_nongenerastingSymbols(self.g)
+        self.assertTrue(self.g.have_term([0, 1]))
+        self.assertTrue(self.g.have_nonterm([A, B, C, D, E]))
+
+    def test_simpleTestWithChange(self):
+        changed = ContextFree.remove_nongenerastingSymbols(self.g, transform_grammar=True)
+        self.assertEqual(id(changed), id(self.g))
+        self.assertTrue(self.g.have_term([0, 1]))
+        self.assertTrue(self.g.have_nonterm([A, B]))
+        self.assertFalse(self.g.have_nonterm(C))
+        self.assertFalse(self.g.have_nonterm(D))
+        self.assertFalse(self.g.have_nonterm(E))
 
 if __name__ == '__main__':
     main()
