@@ -7,15 +7,12 @@ Part of grammpy-transforms
 
 """
 
+from copy import copy
 from grammpy import Grammar
 
 
 def _copy_grammar(grammar):
-    return Grammar(terminals=(item.s for item in grammar.terms()),
-                   nonterminals=grammar.nonterms(),
-                   rules=grammar.rules(),
-                   start_symbol=grammar.start_get())
-
+    return copy(grammar)
 
 def remove_nongenerating_symbol(grammar: Grammar, transform_grammar=False) -> Grammar:
     if transform_grammar is False:
