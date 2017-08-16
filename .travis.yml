@@ -8,7 +8,7 @@ install:
 
 # command to run tests with coverage
 script:
-- coverage run --source=grammpy-transforms -m unittest discover -s tests -p "*Test.py" -q
+- coverage run --source=grammpy_transforms -m unittest discover -s tests -p "*Test.py" -q
 
 # report coverage
 after_script:
