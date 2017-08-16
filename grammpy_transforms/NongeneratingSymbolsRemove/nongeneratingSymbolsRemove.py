@@ -11,4 +11,4 @@ from grammpy import Grammar
 
 
 def remove_nongenerating_symbol(grammar: Grammar, transform_grammar=False) -> Grammar:
-    pass
+    raise NotImplementedError()
