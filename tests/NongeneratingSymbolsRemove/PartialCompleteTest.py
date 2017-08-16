@@ -48,7 +48,7 @@ class PartCompleteTest(TestCase):
     def test_partlyIncompleteTestWithoutChange(self):
         ContextFree.remove_nongenerastingSymbols(self.g)
         self.assertTrue(self.g.have_term([0, 1]))
-        self.assertTrue(self.g.have_nonterm([A, B, C, D, E]))
+        self.assertTrue(self.g.have_nonterm([A, B, C]))
 
     def test_partlyIncompleteTestWithChange(self):
         changed = ContextFree.remove_nongenerastingSymbols(self.g, transform_grammar=True)

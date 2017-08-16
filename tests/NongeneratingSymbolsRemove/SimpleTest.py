@@ -40,7 +40,7 @@ class SimpleTest(TestCase):
         self.g = Grammar()
 
     def setUp(self):
-        g = Grammar(terminals=[0, 1],
+        self.g = Grammar(terminals=[0, 1],
                     nonterminals=[A, B, C],
                     rules=[RuleAto0B, RuleBto1])
 
