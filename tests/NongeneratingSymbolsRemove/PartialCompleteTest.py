@@ -40,18 +40,18 @@ class PartCompleteTest(TestCase):
                                 RuleAto1C, RuleCto0C])
 
     def test_partlyIncompleteTest(self):
-        changed = ContextFree.remove_nongeneratingSymbols(self.g)
+        changed = ContextFree.remove_nongenerating_symbols(self.g)
         self.assertTrue(changed.have_term([0, 1]))
         self.assertTrue(changed.have_nonterm([A, B]))
         self.assertFalse(changed.have_nonterm(C))
 
     def test_partlyIncompleteTestWithoutChange(self):
-        ContextFree.remove_nongeneratingSymbols(self.g)
+        ContextFree.remove_nongenerating_symbols(self.g)
         self.assertTrue(self.g.have_term([0, 1]))
         self.assertTrue(self.g.have_nonterm([A, B, C]))
 
     def test_partlyIncompleteTestWithChange(self):
-        changed = ContextFree.remove_nongeneratingSymbols(self.g, transform_grammar=True)
+        changed = ContextFree.remove_nongenerating_symbols(self.g, transform_grammar=True)
         self.assertEqual(id(changed), id(self.g))
         self.assertTrue(self.g.have_term([0, 1]))
         self.assertTrue(self.g.have_nonterm([A, B]))
