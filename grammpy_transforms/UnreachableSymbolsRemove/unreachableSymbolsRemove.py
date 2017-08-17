@@ -11,7 +11,7 @@ from grammpy import Grammar
 from copy import copy
 
 
-def remove_unreachable_symbols(grammar: Grammar, transform_grammar=False):
+def remove_unreachable_symbols(grammar: Grammar, transform_grammar=False) -> Grammar:
     # Copy if required
     if transform_grammar is False: grammar = copy(grammar)
     raise NotImplementedError()
