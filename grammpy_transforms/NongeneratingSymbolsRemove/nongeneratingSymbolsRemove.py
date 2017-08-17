@@ -14,6 +14,7 @@ from grammpy import Grammar
 def _copy_grammar(grammar):
     return copy(grammar)
 
+
 def remove_nongenerating_symbol(grammar: Grammar, transform_grammar=False) -> Grammar:
     if transform_grammar is False:
         grammar = _copy_grammar(grammar)
@@ -37,8 +38,6 @@ def remove_nongenerating_symbol(grammar: Grammar, transform_grammar=False) -> Gr
         if additional == generates:
             break
         generates = additional
-    allNonterms = list(grammar.nonterms())
-    for nonterm in allNonterms:
-        if nonterm not in generates:
-            grammar.remove_nonterm(nonterm)
+    for nonterm in set(grammar.nonterms()).difference(generates):
+        grammar.remove_nonterm(nonterm)
     return grammar
