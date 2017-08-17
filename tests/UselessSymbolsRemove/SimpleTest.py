@@ -47,7 +47,7 @@ class SimpleTest(TestCase):
                     nonterminals=[S, A, B],
                     rules=[RuleSto0, RuleStoA, RuleAtoAB, RuleBto1],
                     start_symbol=S)
-        ContextFree.remove_useless_symbols(g)
+        ContextFree.remove_useless_symbols(g, transform_grammar=True)
         self.assertTrue(g.have_term(0))
         self.assertFalse(g.have_term(1))
         self.assertTrue(g.have_nonterm(S))

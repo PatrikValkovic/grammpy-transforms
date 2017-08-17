@@ -34,7 +34,7 @@ class ContextFree:
                                    perform_nongenerating_alg = True) -> Grammar:
         if perform_nongenerating_alg:
             grammar = ContextFree.remove_nongenerating_symbols(grammar, transform_grammar=transform_grammar)
-            transform_grammar = False
+            transform_grammar = True
         if perform_unreachable_alg:
             grammar = ContextFree.remove_unreachable_symbols(grammar, transform_grammar=transform_grammar)
         return grammar
