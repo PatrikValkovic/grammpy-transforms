@@ -28,8 +28,7 @@ def remove_nongenerating_symbol(grammar: Grammar, transform_grammar=False) -> Gr
                     allIn = False
             if not allIn:
                 continue
-            for symbol in rule.left:
-                additional.add(symbol)
+            additional.add(rule.fromSymbol)
         if additional == generates:
             break
         generates = additional
