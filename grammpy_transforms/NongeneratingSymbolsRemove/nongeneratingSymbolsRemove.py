@@ -15,7 +15,7 @@ def _copy_grammar(grammar):
     return copy(grammar)
 
 
-def remove_nongenerating_symbol(grammar: Grammar, transform_grammar=False) -> Grammar:
+def remove_nongenerating_symbols(grammar: Grammar, transform_grammar=False) -> Grammar:
     # Copy if required
     if transform_grammar is False: grammar = _copy_grammar(grammar)
     # Create working sets

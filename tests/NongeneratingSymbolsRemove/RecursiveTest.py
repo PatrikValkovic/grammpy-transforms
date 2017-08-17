@@ -66,7 +66,7 @@ class RecursiveTest(TestCase):
                                 RuleEto0C])
 
     def test_recursiveTest(self):
-        changed = ContextFree.remove_nongenerastingSymbols(self.g)
+        changed = ContextFree.remove_nongeneratingSymbols(self.g)
         self.assertTrue(changed.have_term([0, 1]))
         self.assertTrue(changed.have_nonterm([A, B]))
         self.assertFalse(changed.have_nonterm(C))
@@ -74,12 +74,12 @@ class RecursiveTest(TestCase):
         self.assertFalse(changed.have_nonterm(E))
 
     def test_recursiveTestWithoutChange(self):
-        ContextFree.remove_nongenerastingSymbols(self.g)
+        ContextFree.remove_nongeneratingSymbols(self.g)
         self.assertTrue(self.g.have_term([0, 1]))
         self.assertTrue(self.g.have_nonterm([A, B, C, D, E]))
 
     def test_recursiveTestWithChange(self):
-        changed = ContextFree.remove_nongenerastingSymbols(self.g, transform_grammar=True)
+        changed = ContextFree.remove_nongeneratingSymbols(self.g, transform_grammar=True)
         self.assertEqual(id(changed), id(self.g))
         self.assertTrue(self.g.have_term([0, 1]))
         self.assertTrue(self.g.have_nonterm([A, B]))

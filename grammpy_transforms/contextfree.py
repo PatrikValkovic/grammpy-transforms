@@ -8,10 +8,10 @@ Part of grammpy-transforms
 """
 
 from grammpy import Grammar
-from .NongeneratingSymbolsRemove import remove_nongenerating_symbol
+from .NongeneratingSymbolsRemove import remove_nongenerating_symbols
 
 
 class ContextFree():
     @staticmethod
-    def remove_nongenerastingSymbols(grammar: Grammar, transform_grammar=False):
-        return remove_nongenerating_symbol(grammar, transform_grammar)
+    def remove_nongenerating_symbols(grammar: Grammar, transform_grammar=False):
+        return remove_nongenerating_symbols(grammar, transform_grammar)
