@@ -6,5 +6,3 @@
 Part of grammpy-transforms
 
 """
-
-from .unreachableSymbolsRemove import remove_unreachable_symbols

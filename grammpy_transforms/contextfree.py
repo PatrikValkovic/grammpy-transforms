@@ -9,6 +9,7 @@ Part of grammpy-transforms
 
 from grammpy import Grammar
 from .NongeneratingSymbolsRemove import remove_nongenerating_symbols
+from .UnreachableSymbolsRemove import remove_unreachable_symbols
 
 
 class ContextFree:
@@ -22,3 +23,7 @@ class ContextFree:
         if perform_remove:
             g = ContextFree.remove_nongenerating_symbols(grammar, transform_grammar=tranform_gramar)
         return g.start_get() in g.nonterms()
+
+    @staticmethod
+    def remove_unreachable_symbols(grammar: Grammar, transform_grammar=False):
+        return remove_unreachable_symbols(grammar, transform_grammar)
