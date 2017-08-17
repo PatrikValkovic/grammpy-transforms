@@ -1,11 +1,12 @@
 #!/usr/bin/env python
 """
 :Author Patrik Valkovic
-:Created 8/17/17 1:51 PM
+:Created 17.08.2017 13:58
 :Licence GNUv3
 Part of grammpy-transforms
 
 """
+
 
 
 from unittest import main, TestCase
