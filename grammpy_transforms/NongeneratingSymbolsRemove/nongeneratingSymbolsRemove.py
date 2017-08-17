@@ -18,9 +18,11 @@ def remove_nongenerating_symbol(grammar: Grammar, transform_grammar=False) -> Gr
     if transform_grammar is False:
         grammar = _copy_grammar(grammar)
     generates = set(item.s for item in grammar.terms())
+    rules = set(rule for rule in grammar.rules())
     while True:
         additional = generates.copy()
-        for rule in grammar.rules():
+        processedRules = []
+        for rule in rules:
             rightPart = rule.right
             allIn = True
             for symbol in rightPart:
@@ -29,6 +31,9 @@ def remove_nongenerating_symbol(grammar: Grammar, transform_grammar=False) -> Gr
             if not allIn:
                 continue
             additional.add(rule.fromSymbol)
+            processedRules.append(rule)
+        for item in processedRules:
+            rules.remove(item)
         if additional == generates:
             break
         generates = additional
