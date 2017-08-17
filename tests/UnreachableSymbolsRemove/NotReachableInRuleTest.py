@@ -28,7 +28,7 @@ class RuleFto01(Rule): rule = ([F], [0, 1])
 
 
 class NotReachableInRuleTest(TestCase):
-    def test_simpleTest(self):
+    def test_notReachableTest(self):
         g = Grammar(terminals=[0, 1],
                     nonterminals=[A, B, C, D, E, F],
                     rules=[RuleAto0B, RuleBto1C, RuleCto01, RuleDto0E,
@@ -41,7 +41,7 @@ class NotReachableInRuleTest(TestCase):
         self.assertFalse(com.have_nonterm(E))
         self.assertFalse(com.have_nonterm(F))
 
-    def test_simpleTestShouldNotChange(self):
+    def test_notReachableTestShouldNotChange(self):
         g = Grammar(terminals=[0, 1],
                     nonterminals=[A, B, C, D, E, F],
                     rules=[RuleAto0B, RuleBto1C, RuleCto01, RuleDto0E,
@@ -51,7 +51,7 @@ class NotReachableInRuleTest(TestCase):
         self.assertTrue(g.have_term([0, 1]))
         self.assertTrue(g.have_nonterm([A, B, C, D, E, F]))
 
-    def test_simpleTestShouldChange(self):
+    def test_notReachableTestShouldChange(self):
         g = Grammar(terminals=[0, 1],
                     nonterminals=[A, B, C, D, E, F],
                     rules=[RuleAto0B, RuleBto1C, RuleCto01, RuleDto0E,

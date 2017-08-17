@@ -31,7 +31,7 @@ class RuleFto0D(Rule): rule = ([F], [0, D])
 
 
 class RecursiveSeparateTest(TestCase):
-    def test_simpleTest(self):
+    def test_recursiveSeparateTest(self):
         g = Grammar(terminals=[0, 1],
                     nonterminals=[A, B, C, D, E, F],
                     rules=[RuleAto0B, RuleBto1C, RuleCto01,
@@ -44,7 +44,7 @@ class RecursiveSeparateTest(TestCase):
         self.assertFalse(com.have_nonterm(E))
         self.assertFalse(com.have_nonterm(F))
 
-    def test_simpleTestShouldNotChange(self):
+    def test_recursiveSeparateTestShouldNotChange(self):
         g = Grammar(terminals=[0, 1],
                     nonterminals=[A, B, C, D, E, F],
                     rules=[RuleAto0B, RuleBto1C, RuleCto01,
@@ -54,7 +54,7 @@ class RecursiveSeparateTest(TestCase):
         self.assertTrue(g.have_term([0, 1]))
         self.assertTrue(g.have_nonterm([A, B, C, D, E, F]))
 
-    def test_simpleTestShouldChange(self):
+    def test_recursiveSeparateTestShouldChange(self):
         g = Grammar(terminals=[0, 1],
                     nonterminals=[A, B, C, D, E, F],
                     rules=[RuleAto0B, RuleBto1C, RuleCto01,
