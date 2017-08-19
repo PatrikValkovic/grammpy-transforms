@@ -41,10 +41,11 @@ class SimpleTest(TestCase):
         self.assertEqual(g.rules_count(), 13)
         com = ContextFree.remove_useless_symbols(g)
         self.assertTrue(com.have_term([0, 1]))
-        self.assertTrue(com.have_nonterm([S, B, D]))
+        self.assertTrue(com.have_nonterm([S, D]))
         self.assertFalse(com.have_nonterm(A))
+        self.assertFalse(com.have_nonterm(B))
         self.assertFalse(com.have_nonterm(C))
-        self.assertEqual(com.rules_count(), 8)
+        self.assertEqual(com.rules_count(), 6)
 
     def test_epsilonTestShouldNotChange(self):
         g = Grammar(terminals=[0, 1],
@@ -65,10 +66,11 @@ class SimpleTest(TestCase):
         self.assertEqual(g.rules_count(), 13)
         ContextFree.remove_useless_symbols(g, transform_grammar=True)
         self.assertTrue(g.have_term([0, 1]))
-        self.assertTrue(g.have_nonterm([S, B, D]))
+        self.assertTrue(g.have_nonterm([S, D]))
         self.assertFalse(g.have_nonterm(A))
+        self.assertFalse(g.have_nonterm(B))
         self.assertFalse(g.have_nonterm(C))
-        self.assertEqual(g.rules_count(), 8)
+        self.assertEqual(g.rules_count(), 6)
 
 
 
