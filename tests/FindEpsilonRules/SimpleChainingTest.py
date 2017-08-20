@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 """
 :Author Patrik Valkovic
-:Created 20.08.2017 16:01
+:Created 20.08.2017 15:48
 :Licence GNUv3
 Part of grammpy-transforms
 
@@ -17,22 +17,23 @@ class B(Nonterminal): pass
 class C(Nonterminal): pass
 class Rules(Rule):
     rules = [
-        ([S], [1, B]),
-        ([A], [1, B]),
+        ([S], [A, B, C]),
+        ([A], [0, A]),
         ([A], [EPS]),
+        ([B], [A]),
+        ([B], [1, 1]),
         ([B], [EPS]),
-        ([B], [1, C]),
-        ([C], [1, 1])]
+        ([C], [EPS])]
 
 
-class SimpleTest(TestCase):
-    def test_simpleTest(self):
-        g = Grammar(terminals=[1],
+class SimpleChainingTest(TestCase):
+    def test_simpleChainingTest(self):
+        g = Grammar(terminals=[0, 1],
                     nonterminals=[S, A, B, C],
                     rules=[Rules])
         n = ContextFree.find_terminals_rewritable_to_epsilon(g)
-        self.assertEqual(len(n), 2)
-        for i in [A, B]:
+        self.assertEqual(len(n), 4)
+        for i in [S, A, B, C]:
             self.assertIn(i, n)
 
 
