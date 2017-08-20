@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 """
 :Author Patrik Valkovic
-:Created 20.08.2017 15:48
+:Created 20.08.2017 15:55
 :Licence GNUv3
 Part of grammpy-transforms
 
@@ -15,25 +15,31 @@ class S(Nonterminal): pass
 class A(Nonterminal): pass
 class B(Nonterminal): pass
 class C(Nonterminal): pass
+class D(Nonterminal): pass
 class Rules(Rule):
     rules = [
-        ([S], [A, B, C]),
-        ([A], [0, A]),
-        ([A], [EPS]),
-        ([B], [A]),
-        ([B], [1, 1]),
+        ([S], [A, 0, A]),
+        ([S], [0]),
+        ([A], [B, C]),
+        ([A], [2]),
+        ([A], [C, C, C]), # multiple here
+        ([B], [1, C]),
+        ([B], [3, D]),
         ([B], [EPS]),
-        ([C], [EPS])]
+        ([C], [A, A, 3]),
+        ([C], [EPS]),
+        ([D], [A, A, B]),
+        ([D], [A, A, 3])]
 
 
-class SimpleTest(TestCase):
-    def test_simpleTest(self):
-        g = Grammar(terminals=[0, 1],
-                    nonterminals=[S, A, B, C],
+class MultipleUsageTest(TestCase):
+    def test_multipleUsage(self):
+        g = Grammar(terminals=[0,1,2,3],
+                    nonterminals=[S,A,B,C, D],
                     rules=[Rules])
         n = ContextFree.find_terminals_rewritable_to_epsilon(g)
         self.assertEqual(len(n), 4)
-        for i in [S, A, B, C]:
+        for i in [A, B, C, D]:
             self.assertIn(i, n)
 
 
