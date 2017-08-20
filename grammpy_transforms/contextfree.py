@@ -10,6 +10,7 @@ Part of grammpy-transforms
 from grammpy import Grammar
 from .NongeneratingSymbolsRemove import remove_nongenerating_symbols
 from .UnreachableSymbolsRemove import remove_unreachable_symbols
+from .EpsilonRulesRemove import remove_rules_with_epsilon, find_terminals_rewritable_to_epsilon
 
 
 class ContextFree:
@@ -38,3 +39,11 @@ class ContextFree:
         if perform_unreachable_alg:
             grammar = ContextFree.remove_unreachable_symbols(grammar, transform_grammar=transform_grammar)
         return grammar
+
+    @staticmethod
+    def remove_rules_with_epsilon(grammar: Grammar, transform_grammar=True) -> Grammar:
+        return remove_rules_with_epsilon(grammar, transform_grammar=transform_grammar)
+
+    @staticmethod
+    def find_terminals_rewritable_to_epsilon(grammar: Grammar) -> list:
+        return find_terminals_rewritable_to_epsilon(grammar)
