@@ -7,5 +7,5 @@ Part of grammpy-transforms
 
 """
 
-from .epsilonRulesRemove import remove_rules_with_epsilon
+from .epsilonRulesRemove import remove_rules_with_epsilon, EpsilonRemovedRule
 from .findTerminalsRewritedToEps import find_terminals_rewritable_to_epsilon

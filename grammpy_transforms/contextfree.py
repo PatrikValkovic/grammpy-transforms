@@ -10,10 +10,13 @@ Part of grammpy-transforms
 from grammpy import Grammar
 from .NongeneratingSymbolsRemove import remove_nongenerating_symbols
 from .UnreachableSymbolsRemove import remove_unreachable_symbols
-from .EpsilonRulesRemove import remove_rules_with_epsilon, find_terminals_rewritable_to_epsilon
+from .EpsilonRulesRemove import *
 
 
 class ContextFree:
+
+    EpsilonRemovedRule = EpsilonRemovedRule
+
     @staticmethod
     def remove_nongenerating_symbols(grammar: Grammar, transform_grammar=False):
         return remove_nongenerating_symbols(grammar, transform_grammar)

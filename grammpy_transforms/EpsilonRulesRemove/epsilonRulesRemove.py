@@ -10,5 +10,10 @@ Part of grammpy-transforms
 from grammpy import Grammar, Rule
 
 
+class EpsilonRemovedRule(Rule):
+    from_rule = None  # type: Rule
+    replace_index = None  # type: int
+
+
 def remove_rules_with_epsilon(grammar: Grammar, transform_grammar=True) -> Grammar:
     raise NotImplementedError()
