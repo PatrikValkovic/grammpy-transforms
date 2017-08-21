@@ -39,7 +39,6 @@ class SimpleTest(TestCase):
                     nonterminals=[S, A, B, C],
                     rules=[Rules])
         com = ContextFree.remove_rules_with_epsilon(g)
-        self.assertEqual(len(com.rules(include_inactive=True)), 8)
         self.assertEqual(com.rules_count(), 6)
         class RuleNewS(Rule): rule=([S], [1])
         class RuleNewA(Rule): rule=([A], [1])
@@ -61,19 +60,14 @@ class SimpleTest(TestCase):
         self.assertEqual(fromA.replace_index, 1)
         class OldA(Rule): rule=([A], [EPS])
         class OldB(Rule): rule=([B], [EPS])
-        self.assertTrue(com.have_rule(OldA))
-        realA = com.get_rule(OldA)
-        self.assertFalse(realA._active)
-        self.assertTrue(com.have_rule(OldB))
-        realB = com.get_rule(OldB)
-        self.assertFalse(realB._active)
+        self.assertFalse(com.have_rule(OldA))
+        self.assertFalse(com.have_rule(OldB))
 
     def test_simpleTestShouldNotChange(self):
         g = Grammar(terminals=[1],
                     nonterminals=[S, A, B, C],
                     rules=[Rules])
         ContextFree.remove_rules_with_epsilon(g)
-        self.assertEqual(len(g.rules(include_inactive=True)), 6)
         self.assertEqual(g.rules_count(), 6)
         class RuleNewS(Rule): rule=([S], [1])
         class RuleNewA(Rule): rule=([A], [1])
@@ -82,18 +76,13 @@ class SimpleTest(TestCase):
         class OldA(Rule): rule=([A], [EPS])
         class OldB(Rule): rule=([B], [EPS])
         self.assertTrue(g.have_rule(OldA))
-        realA = g.get_rule(OldA)
-        self.assertTrue(realA._active)
         self.assertTrue(g.have_rule(OldB))
-        realB = g.get_rule(OldB)
-        self.assertTrue(realB._active)
 
     def test_simpleTestShouldChange(self):
         g = Grammar(terminals=[1],
                     nonterminals=[S, A, B, C],
                     rules=[Rules])
         ContextFree.remove_rules_with_epsilon(g, transform_grammar=True)
-        self.assertEqual(len(g.rules(include_inactive=True)), 8)
         self.assertEqual(g.rules_count(), 6)
         class RuleNewS(Rule): rule=([S], [1])
         class RuleNewA(Rule): rule=([A], [1])
@@ -115,12 +104,8 @@ class SimpleTest(TestCase):
         self.assertEqual(fromA.replace_index, 1)
         class OldA(Rule): rule=([A], [EPS])
         class OldB(Rule): rule=([B], [EPS])
-        self.assertTrue(g.have_rule(OldA))
-        realA = g.get_rule(OldA)
-        self.assertFalse(realA._active)
-        self.assertTrue(g.have_rule(OldB))
-        realB = g.get_rule(OldB)
-        self.assertFalse(realB._active)
+        self.assertFalse(g.have_rule(OldA))
+        self.assertFalse(g.have_rule(OldB))
 
 
 
