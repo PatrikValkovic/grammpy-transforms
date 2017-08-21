@@ -41,7 +41,8 @@ class SimpleChainingTest(TestCase):
     def test_simpleChainingTest(self):
         g = Grammar(terminals=[0, 1],
                     nonterminals=[S, A, B, C],
-                    rules=[Rules])
+                    rules=[Rules],
+                    start_symbol=S)
         com = ContextFree.remove_rules_with_epsilon(g)
         self.assertEqual(len(com.rules()), 12)
         class RuleNewStoBC(Rule): rule=([S], [B, C])

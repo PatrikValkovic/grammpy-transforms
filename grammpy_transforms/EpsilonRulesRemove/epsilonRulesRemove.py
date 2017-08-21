@@ -33,6 +33,8 @@ def _create_rule(rule: Rule, index: int) -> EpsilonRemovedRule:
     # Add rule
     created.fromSymbol = rule.fromSymbol
     created.right = [rule.right[i] for i in range(len(rule.right)) if i != index]
+    if len(created.right) == 0:
+        created.right = [EPSILON]
     return created
 
 def remove_rules_with_epsilon(grammar: Grammar, transform_grammar=False) -> Grammar:
@@ -49,7 +51,8 @@ def remove_rules_with_epsilon(grammar: Grammar, transform_grammar=False) -> Gram
         index += 1
         right = rule.right
         if right == [EPSILON]:
-            grammar.remove_rule(rule)
+            if grammar.start_isSet() and rule.fromSymbol != grammar.start_get():
+                grammar.remove_rule(rule)
             continue
         for rule_index in range(len(right)):
             symbol = right[rule_index]
