@@ -10,14 +10,9 @@ Part of grammpy-transforms
 from copy import copy
 from grammpy import Grammar, EPSILON
 
-
-def _copy_grammar(grammar):
-    return copy(grammar)
-
-
 def remove_nongenerating_symbols(grammar: Grammar, transform_grammar=False) -> Grammar:
     # Copy if required
-    if transform_grammar is False: grammar = _copy_grammar(grammar)
+    if transform_grammar is False: grammar = copy(grammar)
     # Create working sets
     generates = set(item.s for item in grammar.terms())
     generates.add(EPSILON)
