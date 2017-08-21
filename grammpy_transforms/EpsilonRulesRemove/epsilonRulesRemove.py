@@ -51,7 +51,7 @@ def remove_rules_with_epsilon(grammar: Grammar, transform_grammar=False) -> Gram
         index += 1
         right = rule.right
         if right == [EPSILON]:
-            if grammar.start_isSet() and rule.fromSymbol != grammar.start_get():
+            if not grammar.start_isSet() or rule.fromSymbol != grammar.start_get():
                 grammar.remove_rule(rule)
             continue
         for rule_index in range(len(right)):
