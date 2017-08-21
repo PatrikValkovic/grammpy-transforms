@@ -42,7 +42,8 @@ class SimpleChainingTest(TestCase):
     def test_simpleChainingTest(self):
         g = Grammar(terminals=[0, 1],
                     nonterminals=[S, A, B, C],
-                    rules=[Rules])
+                    rules=[Rules],
+                    start_symbol=S)
         com = ContextFree.remove_rules_with_epsilon(g)
         self.assertEqual(len(com.rules()), 11)
         class RuleNewSto0(Rule): rule=([S], [0])
@@ -76,7 +77,8 @@ class SimpleChainingTest(TestCase):
     def test_simpleChainingTestShouldNotChange(self):
         g = Grammar(terminals=[0, 1],
                     nonterminals=[S, A, B, C],
-                    rules=[Rules])
+                    rules=[Rules],
+                    start_symbol=S)
         ContextFree.remove_rules_with_epsilon(g)
         self.assertEqual(len(g.rules()), 8)
         class RuleNewSto0(Rule): rule=([S], [0])
@@ -93,7 +95,8 @@ class SimpleChainingTest(TestCase):
     def test_simpleChainingTestShouldChange(self):
         g = Grammar(terminals=[0, 1],
                     nonterminals=[S, A, B, C],
-                    rules=[Rules])
+                    rules=[Rules],
+                    start_symbol=S)
         ContextFree.remove_rules_with_epsilon(g, transform_grammar=True)
         self.assertEqual(len(g.rules()), 11)
         class RuleNewSto0(Rule): rule=([S], [0])

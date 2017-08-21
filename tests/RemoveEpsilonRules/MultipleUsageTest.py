@@ -50,7 +50,8 @@ class MultipleUsageTest(TestCase):
     def test_multipleUsage(self):
         g = Grammar(terminals=[0, 1, 2, 3],
                     nonterminals=[S, A, B, C, D],
-                    rules=[Rules])
+                    rules=[Rules],
+                    start_symbol=S)
         com = ContextFree.remove_rules_with_epsilon(g)
         self.assertEqual(len(com.rules()), 25)
         self.assertEqual(com.rules_count(), 25)
@@ -167,7 +168,8 @@ class MultipleUsageTest(TestCase):
     def test_multipleUsageShouldNotChange(self):
         g = Grammar(terminals=[0, 1, 2, 3],
                     nonterminals=[S, A, B, C, D],
-                    rules=[Rules])
+                    rules=[Rules],
+                    start_symbol=S)
         ContextFree.remove_rules_with_epsilon(g)
         self.assertEqual(len(g.rules()), 12)
         self.assertEqual(g.rules_count(), 12)
@@ -209,7 +211,8 @@ class MultipleUsageTest(TestCase):
     def test_multipleUsageShouldChange(self):
         g = Grammar(terminals=[0, 1, 2, 3],
                     nonterminals=[S, A, B, C, D],
-                    rules=[Rules])
+                    rules=[Rules],
+                    start_symbol=S)
         ContextFree.remove_rules_with_epsilon(g, transform_grammar=True)
         self.assertEqual(len(g.rules()), 25)
         self.assertEqual(g.rules_count(), 25)
