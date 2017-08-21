@@ -8,7 +8,7 @@ Part of grammpy-transforms
 """
 
 from copy import copy
-from grammpy import Grammar, Rule
+from grammpy import Grammar, Rule, EPSILON
 from .findTerminalsRewritedToEps import find_terminals_rewritable_to_epsilon
 
 
@@ -35,7 +35,7 @@ def _create_rule(rule: Rule, index: int) -> EpsilonRemovedRule:
     created.right = [rule.right[i] for i in range(len(rule.right)) if i != index]
     return created
 
-def remove_rules_with_epsilon(grammar: Grammar, transform_grammar=True) -> Grammar:
+def remove_rules_with_epsilon(grammar: Grammar, transform_grammar=False) -> Grammar:
     # Copy if required
     if transform_grammar is False: grammar = copy(grammar)
     # Find nonterminals rewritable to epsilon
@@ -48,8 +48,13 @@ def remove_rules_with_epsilon(grammar: Grammar, transform_grammar=True) -> Gramm
         rule = rules[index]
         index += 1
         right = rule.right
+        if right == [EPSILON]:
+            grammar.remove_rule(rule)
+            continue
         for rule_index in range(len(right)):
             symbol = right[rule_index]
             if symbol in rewritable:
                 new_rule = _create_rule(rule, rule_index)
                 rules.append(new_rule)
+                grammar.add_rule(new_rule)
+    return grammar

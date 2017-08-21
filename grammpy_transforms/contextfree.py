@@ -44,7 +44,7 @@ class ContextFree:
         return grammar
 
     @staticmethod
-    def remove_rules_with_epsilon(grammar: Grammar, transform_grammar=True) -> Grammar:
+    def remove_rules_with_epsilon(grammar: Grammar, transform_grammar=False) -> Grammar:
         return remove_rules_with_epsilon(grammar, transform_grammar=transform_grammar)
 
     @staticmethod
