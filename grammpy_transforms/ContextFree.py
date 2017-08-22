@@ -18,6 +18,9 @@ from .UnitRulesRemove import *
 class ContextFree:
 
     EpsilonRemovedRule = EpsilonRemovedRule
+    ReducedUnitRule = ReducedUnitRule
+
+    UnitSymbolRechablingResults = UnitSymbolRechablingResults
 
     @staticmethod
     def remove_nongenerating_nonterminals(grammar: Grammar, transform_grammar=False):
@@ -54,7 +57,7 @@ class ContextFree:
         return find_nonterminals_rewritable_to_epsilon(grammar)
 
     @staticmethod
-    def find_nonterminals_reachable_by_unit_rules(grammar: Grammar) -> Dict[Nonterminal, List[Nonterminal]]:
+    def find_nonterminals_reachable_by_unit_rules(grammar: Grammar) -> UnitSymbolRechablingResults:
         return find_nonterminals_reachable_by_unit_rules(grammar)
 
     @staticmethod

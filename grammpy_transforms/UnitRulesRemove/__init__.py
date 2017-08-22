@@ -7,5 +7,5 @@ Part of grammpy-transforms
 
 """
 
-from .find_symbols_reachable_by_unit_rules import find_nonterminals_reachable_by_unit_rules
-from .remove_unit_rules import remove_unit_rules
+from .find_symbols_reachable_by_unit_rules import find_nonterminals_reachable_by_unit_rules, UnitSymbolRechablingResults
+from .remove_unit_rules import remove_unit_rules, ReducedUnitRule
