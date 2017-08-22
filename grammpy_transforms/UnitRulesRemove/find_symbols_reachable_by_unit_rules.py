@@ -32,7 +32,7 @@ class UnitSymbolRechablingResults:
                 reachable.append(n)
         return reachable
 
-    def path_rules(self, from_symbol: Nonterminal, to_symbol: Nonterminal) -> Optional[List[Rule]]:
+    def path_rules(self, from_symbol: Nonterminal, to_symbol: Nonterminal):
         if from_symbol not in self.t or to_symbol not in self.t:
             return None
         return self.f[self.t[from_symbol]][self.t[to_symbol]]
