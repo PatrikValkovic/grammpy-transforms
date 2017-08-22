@@ -22,9 +22,9 @@ class UnitSymbolRechablingResults:
             return False
         return self.f[self.t[from_symbol]][self.t[to_symbol]] is not None
 
-    def reachables(self, from_symbol: Nonterminal) -> Optional[List[Nonterminal]]:
+    def reachables(self, from_symbol: Nonterminal) -> List[Nonterminal]:
         if from_symbol not in self.t:
-            return None  # TODO raise exception?
+            return []
         reachable = []
         index = self.t[from_symbol]
         for n, i in self.t.items():
