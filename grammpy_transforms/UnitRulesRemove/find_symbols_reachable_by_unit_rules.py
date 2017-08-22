@@ -7,8 +7,9 @@ Part of grammpy-transforms
 
 """
 
+from inspect import isclass
 from typing import List
-from grammpy import Grammar
+from grammpy import Grammar, Nonterminal, Rule
 
 
 class UnitSymbolRechablingResults:
@@ -34,16 +35,15 @@ def find_nonterminals_reachable_by_unit_rules(grammar: Grammar) -> UnitSymbolRec
     for i in range(l):
         nonterm_to_index[nonterms[i]] = i
     # Prepare field
-    field = [[] for _ in nonterms]
-    for i in range(l):
-        for j in range(l):
-            field[i][j] = None
+    field = [[None for _ in nonterms] for _ in nonterms]
     # Fill diagonal
     for i in range(l):
         field[i][i] = list()
     # Fill rules
     for rule in grammar.rules():
-        if len(rule.left)==1 and len(rule.right)==1:
+        if len(rule.left)==1 and len(rule.right)==1 and \
+                isclass(rule.fromSymbol) and isclass(rule.toSymbol) and \
+                issubclass(rule.fromSymbol, Nonterminal) and issubclass(rule.toSymbol, Nonterminal):
             field[nonterm_to_index[rule.fromSymbol]][nonterm_to_index[rule.toSymbol]] = [rule]
     # Floyd Warshall
     f = field
