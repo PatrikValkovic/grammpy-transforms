@@ -94,9 +94,9 @@ class SimpleTest(TestCase):
         self.assertEqual(SBRules[1].rule, ([A], [B]))
         SCRules = res.path_rules(S, C)
         self.assertEqual(len(SCRules), 3)
-        self.assertEqual(SBRules[0].rule, ([S], [A]))
-        self.assertEqual(SBRules[1].rule, ([A], [B]))
-        self.assertEqual(SBRules[2].rule, ([B], [C]))
+        self.assertEqual(SCRules[0].rule, ([S], [A]))
+        self.assertEqual(SCRules[1].rule, ([A], [B]))
+        self.assertEqual(SCRules[2].rule, ([B], [C]))
         # Rules A
         self.assertEqual(res.path_rules(A, A), [])
         ABRules = res.path_rules(A, B)

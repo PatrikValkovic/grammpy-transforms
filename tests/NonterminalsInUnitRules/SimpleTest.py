@@ -79,7 +79,7 @@ class SimpleTest(TestCase):
         self.assertFalse(res.reach(C, S))
         self.assertFalse(res.reach(C, A))
         self.assertFalse(res.reach(C, B))
-        self.assertFalse(res.reach(C, C))
+        self.assertTrue(res.reach(C, C))
         self.assertFalse(res.reach(C, D))
         # From D
         self.assertFalse(res.reach(D, S))
@@ -117,8 +117,8 @@ class SimpleTest(TestCase):
         self.assertEqual(SCRules[1].rule, ([A], [C]))
         SDRules = res.path_rules(S, D)
         self.assertEqual(len(SDRules), 2)
-        self.assertEqual(SDRules[0].rule, ([S], [A]))
-        self.assertEqual(SDRules[1].rule, ([A], [C]))
+        self.assertEqual(SDRules[0].rule, ([S], [B]))
+        self.assertEqual(SDRules[1].rule, ([B], [D]))
         # Rules A
         self.assertEqual(res.path_rules(A, A), [])
         ACRules = res.path_rules(A, C)
