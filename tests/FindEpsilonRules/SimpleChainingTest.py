@@ -31,7 +31,7 @@ class SimpleChainingTest(TestCase):
         g = Grammar(terminals=[0, 1],
                     nonterminals=[S, A, B, C],
                     rules=[Rules])
-        n = ContextFree.find_terminals_rewritable_to_epsilon(g)
+        n = ContextFree.find_nonterminals_rewritable_to_epsilon(g)
         self.assertEqual(len(n), 4)
         for i in [S, A, B, C]:
             self.assertIn(i, n)

@@ -10,7 +10,7 @@ Part of grammpy-transforms
 from copy import copy
 from grammpy import Grammar, EPSILON
 
-def remove_nongenerating_symbols(grammar: Grammar, transform_grammar=False) -> Grammar:
+def remove_nongenerating_nonterminals(grammar: Grammar, transform_grammar=False) -> Grammar:
     # Copy if required
     if transform_grammar is False: grammar = copy(grammar)
     # Create working sets

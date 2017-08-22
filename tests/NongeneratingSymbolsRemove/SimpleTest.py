@@ -45,18 +45,18 @@ class SimpleTest(TestCase):
                     rules=[RuleAto0B, RuleBto1])
 
     def test_simpleTest(self):
-        changed = ContextFree.remove_nongenerating_symbols(self.g)
+        changed = ContextFree.remove_nongenerating_nonterminals(self.g)
         self.assertTrue(changed.have_term([0, 1]))
         self.assertTrue(changed.have_nonterm([A, B]))
         self.assertFalse(changed.have_nonterm(C))
 
     def test_simpleTestWithoutChange(self):
-        ContextFree.remove_nongenerating_symbols(self.g)
+        ContextFree.remove_nongenerating_nonterminals(self.g)
         self.assertTrue(self.g.have_term([0, 1]))
         self.assertTrue(self.g.have_nonterm([A, B, C]))
 
     def test_simpleTestWithChange(self):
-        changed = ContextFree.remove_nongenerating_symbols(self.g, transform_grammar=True)
+        changed = ContextFree.remove_nongenerating_nonterminals(self.g, transform_grammar=True)
         self.assertEqual(id(changed), id(self.g))
         self.assertTrue(self.g.have_term([0, 1]))
         self.assertTrue(self.g.have_nonterm([A, B]))

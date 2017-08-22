@@ -11,7 +11,7 @@ from typing import List
 from grammpy import Grammar, EPSILON, Nonterminal
 
 
-def find_terminals_rewritable_to_epsilon(grammar: Grammar) -> List[Nonterminal]:
+def find_nonterminals_rewritable_to_epsilon(grammar: Grammar) -> List[Nonterminal]:
     rewritable = {EPSILON}
     while True:
         working = rewritable.copy()

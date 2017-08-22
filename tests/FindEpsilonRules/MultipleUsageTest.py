@@ -37,7 +37,7 @@ class MultipleUsageTest(TestCase):
         g = Grammar(terminals=[0,1,2,3],
                     nonterminals=[S,A,B,C, D],
                     rules=[Rules])
-        n = ContextFree.find_terminals_rewritable_to_epsilon(g)
+        n = ContextFree.find_nonterminals_rewritable_to_epsilon(g)
         self.assertEqual(len(n), 4)
         for i in [A, B, C, D]:
             self.assertIn(i, n)

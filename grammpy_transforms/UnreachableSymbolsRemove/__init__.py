@@ -7,4 +7,4 @@ Part of grammpy-transforms
 
 """
 
-from .unreachableSymbolsRemove import remove_unreachable_symbols
+from .remove_unreachable_symbols import remove_unreachable_symbols

@@ -7,10 +7,10 @@ Part of grammpy-transforms
 
 """
 
-from types import Dict, List
-from grammpy import Grammar
-from .NongeneratingSymbolsRemove import remove_nongenerating_symbols
-from .UnreachableSymbolsRemove import remove_unreachable_symbols
+from typing import Dict, List
+from grammpy import *
+from .NongeneratingSymbolsRemove import *
+from .UnreachableSymbolsRemove import *
 from .EpsilonRulesRemove import *
 from .UnitRulesRemove import *
 
@@ -20,14 +20,14 @@ class ContextFree:
     EpsilonRemovedRule = EpsilonRemovedRule
 
     @staticmethod
-    def remove_nongenerating_symbols(grammar: Grammar, transform_grammar=False):
-        return remove_nongenerating_symbols(grammar, transform_grammar)
+    def remove_nongenerating_nonterminals(grammar: Grammar, transform_grammar=False):
+        return remove_nongenerating_nonterminals(grammar, transform_grammar)
 
     @staticmethod
     def is_grammar_generating(grammar: Grammar, transform_grammar=False, perform_remove=True):
         g = grammar
         if perform_remove:
-            g = ContextFree.remove_nongenerating_symbols(grammar, transform_grammar=transform_grammar)
+            g = ContextFree.remove_nongenerating_nonterminals(grammar, transform_grammar=transform_grammar)
         return g.start_get() in g.nonterms()
 
     @staticmethod
@@ -39,7 +39,7 @@ class ContextFree:
                                    perform_unreachable_alg = True,
                                    perform_nongenerating_alg = True) -> Grammar:
         if perform_nongenerating_alg:
-            grammar = ContextFree.remove_nongenerating_symbols(grammar, transform_grammar=transform_grammar)
+            grammar = ContextFree.remove_nongenerating_nonterminals(grammar, transform_grammar=transform_grammar)
             transform_grammar = True
         if perform_unreachable_alg:
             grammar = ContextFree.remove_unreachable_symbols(grammar, transform_grammar=transform_grammar)
@@ -50,13 +50,13 @@ class ContextFree:
         return remove_rules_with_epsilon(grammar, transform_grammar=transform_grammar)
 
     @staticmethod
-    def find_terminals_rewritable_to_epsilon(grammar: Grammar) -> List[Nonterminal]:
-        return find_terminals_rewritable_to_epsilon(grammar)
+    def find_nonterminals_rewritable_to_epsilon(grammar: Grammar) -> List[Nonterminal]:
+        return find_nonterminals_rewritable_to_epsilon(grammar)
 
     @staticmethod
-    def find_reachables_symbols_by_unit_rules(grammar: Grammar) -> Dict[Nonterminal, List[Nonterminal]]:
-        return find_reachables_symbols_by_unit_rules(grammar)
+    def find_nonterminals_reachable_by_unit_rules(grammar: Grammar) -> Dict[Nonterminal, List[Nonterminal]]:
+        return find_nonterminals_reachable_by_unit_rules(grammar)
 
     @staticmethod
-    def remove_unit_rules(grammar: Gramar, transform_grammar=False) -> Grammar:
+    def remove_unit_rules(grammar: Grammar, transform_grammar=False) -> Grammar:
         return remove_unit_rules(grammar, transform_grammar=transform_grammar)

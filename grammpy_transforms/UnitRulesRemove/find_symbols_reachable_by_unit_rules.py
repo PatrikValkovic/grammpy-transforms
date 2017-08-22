@@ -7,10 +7,10 @@ Part of grammpy-transforms
 
 """
 
-from types import Dict, List
+from typing import Dict, List
 from grammpy import Nonterminal
 
 
-def find_reachables_symbols_by_unit_rules(grammar) \
+def find_nonterminals_reachable_by_unit_rules(grammar) \
         -> Dict[Nonterminal, List[Nonterminal]]:
     raise NotImplementedError()

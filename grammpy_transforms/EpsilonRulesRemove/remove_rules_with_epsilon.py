@@ -9,7 +9,7 @@ Part of grammpy-transforms
 
 from copy import copy
 from grammpy import Grammar, Rule, EPSILON
-from .findTerminalsRewritedToEps import find_terminals_rewritable_to_epsilon
+from .find_nonterminals_rewritable_to_epsilon import find_nonterminals_rewritable_to_epsilon
 
 
 class EpsilonRemovedRule(Rule):
@@ -41,7 +41,7 @@ def remove_rules_with_epsilon(grammar: Grammar, transform_grammar=False) -> Gram
     # Copy if required
     if transform_grammar is False: grammar = copy(grammar)
     # Find nonterminals rewritable to epsilon
-    rewritable = set(find_terminals_rewritable_to_epsilon(grammar))
+    rewritable = set(find_nonterminals_rewritable_to_epsilon(grammar))
     # Create list from rules
     rules = list(grammar.rules())
     index = 0

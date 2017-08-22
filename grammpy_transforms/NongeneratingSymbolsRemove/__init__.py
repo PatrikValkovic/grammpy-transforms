@@ -7,4 +7,4 @@ Part of grammpy-transforms
 
 """
 
-from .nongeneratingSymbolsRemove import remove_nongenerating_symbols
+from .remove_nongenerating_nonterminals import remove_nongenerating_nonterminals

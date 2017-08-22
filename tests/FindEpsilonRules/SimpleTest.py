@@ -30,7 +30,7 @@ class SimpleTest(TestCase):
         g = Grammar(terminals=[1],
                     nonterminals=[S, A, B, C],
                     rules=[Rules])
-        n = ContextFree.find_terminals_rewritable_to_epsilon(g)
+        n = ContextFree.find_nonterminals_rewritable_to_epsilon(g)
         self.assertEqual(len(n), 2)
         for i in [A, B]:
             self.assertIn(i, n)
