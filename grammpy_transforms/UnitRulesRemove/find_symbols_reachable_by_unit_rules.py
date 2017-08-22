@@ -8,7 +8,7 @@ Part of grammpy-transforms
 """
 
 from inspect import isclass
-from typing import List, Dict
+from typing import List, Dict, Optional
 from grammpy import Grammar, Nonterminal, Rule
 
 
@@ -22,7 +22,7 @@ class UnitSymbolRechablingResults:
             return False
         return self.f[self.t[from_symbol]][self.t[to_symbol]] is not None
 
-    def reachables(self, from_symbol: Nonterminal) -> None | List[Nonterminal]:
+    def reachables(self, from_symbol: Nonterminal) -> Optional[List[Nonterminal]]:
         if from_symbol not in self.t:
             return None  # TODO raise exception?
         reachable = []
@@ -32,7 +32,7 @@ class UnitSymbolRechablingResults:
                 reachable.append(n)
         return reachable
 
-    def path_rules(self, from_symbol: Nonterminal, to_symbol: Nonterminal) -> List[Rule] | None:
+    def path_rules(self, from_symbol: Nonterminal, to_symbol: Nonterminal) -> Optional[List[Rule]]:
         if from_symbol not in self.t or to_symbol not in self.t:
             return None
         return self.f[self.t[from_symbol]][self.t[to_symbol]]
