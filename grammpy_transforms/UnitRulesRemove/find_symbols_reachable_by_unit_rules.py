@@ -8,22 +8,34 @@ Part of grammpy-transforms
 """
 
 from inspect import isclass
-from typing import List
+from typing import List, Dict
 from grammpy import Grammar, Nonterminal, Rule
 
 
 class UnitSymbolRechablingResults:
     def __init__(self, field, translation):
-        raise NotImplementedError()
+        self.f = field  # type: List[List[List[Rule] | None]]
+        self.t = translation  # type: Dict[Nonterminal, int]
 
     def reach(self, from_symbol: Nonterminal, to_symbol: Nonterminal) -> bool:
-        raise NotImplementedError()
+        if from_symbol not in self.t or to_symbol not in self.t:
+            return False
+        return self.f[self.t[from_symbol]][self.t[to_symbol]] is not None
 
-    def reachables(self, from_symbol: Nonterminal) -> List[Nonterminal]:
-        raise NotImplementedError()
+    def reachables(self, from_symbol: Nonterminal) -> None | List[Nonterminal]:
+        if from_symbol not in self.t:
+            return None  # TODO raise exception?
+        reachable = []
+        index = self.t[from_symbol]
+        for n, i in self.t.items():
+            if self.f[index][i] is not None:
+                reachable.append(n)
+        return reachable
 
-    def path_rules(self, from_symbol: Nonterminal, to_symbol: Nonterminal) -> List[Rule]:
-        raise NotImplementedError()
+    def path_rules(self, from_symbol: Nonterminal, to_symbol: Nonterminal) -> List[Rule] | None:
+        if from_symbol not in self.t or to_symbol not in self.t:
+            return None
+        return self.f[self.t[from_symbol]][self.t[to_symbol]]
 
 
 def find_nonterminals_reachable_by_unit_rules(grammar: Grammar) -> UnitSymbolRechablingResults:
