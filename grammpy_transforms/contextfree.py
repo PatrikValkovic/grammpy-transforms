@@ -7,10 +7,12 @@ Part of grammpy-transforms
 
 """
 
+from types import Dict, List
 from grammpy import Grammar
 from .NongeneratingSymbolsRemove import remove_nongenerating_symbols
 from .UnreachableSymbolsRemove import remove_unreachable_symbols
 from .EpsilonRulesRemove import *
+from .UnitRulesRemove import *
 
 
 class ContextFree:
@@ -48,5 +50,13 @@ class ContextFree:
         return remove_rules_with_epsilon(grammar, transform_grammar=transform_grammar)
 
     @staticmethod
-    def find_terminals_rewritable_to_epsilon(grammar: Grammar) -> list:
+    def find_terminals_rewritable_to_epsilon(grammar: Grammar) -> List[Nonterminal]:
         return find_terminals_rewritable_to_epsilon(grammar)
+
+    @staticmethod
+    def find_reachables_symbols_by_unit_rules(grammar: Grammar) -> Dict[Nonterminal, List[Nonterminal]]:
+        return find_reachables_symbols_by_unit_rules(grammar)
+
+    @staticmethod
+    def remove_unit_rules(grammar: Gramar, transform_grammar=False) -> Grammar:
+        return remove_unit_rules(grammar, transform_grammar=transform_grammar)
