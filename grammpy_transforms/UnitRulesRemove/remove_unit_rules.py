@@ -19,7 +19,7 @@ class ReducedUnitRule(Rule):
 
 
 def _is_unit(rule: Rule) -> bool:
-    return len(rule.left) == 0 and len(rule.right) == 0 and \
+    return len(rule.left) == 1 and len(rule.right) == 1 and \
            isclass(rule.fromSymbol) and isclass(rule.toSymbol) and \
            issubclass(rule.fromSymbol, Nonterminal) and issubclass(rule.toSymbol, Nonterminal)
 
@@ -31,7 +31,7 @@ def _create_rule(path: List[Rule], rule: Rule) -> ReducedUnitRule:
     return created
 
 def remove_unit_rules(grammar: Grammar, transform_grammar=False) -> Grammar:
-    if transform_grammar is True: grammar = copy(grammar)
+    if transform_grammar is False: grammar = copy(grammar)
     #get connections
     res = find_nonterminals_reachable_by_unit_rules(grammar)
     #iterate through rules
