@@ -73,7 +73,7 @@ def transform_to_chomsky_normal_form(grammar: Grammar, transform_grammar=False):
             created_left_rule.from_rule = rule
             #create rule with symbols on the right
             created_right_rule = type("SplitTempRule" + str(index - 1), (ChomskySplitRule,), ChomskySplitRule.__dict__.copy())
-            created_right_rule.rule = ([rule.fromSymbol], rule.right[1:])
+            created_right_rule.rule = ([created_nonterm], rule.right[1:])
             created_right_rule.from_rule = rule
             #fill
             grammar.add_nonterm(created_nonterm)
