@@ -33,7 +33,7 @@ class MoreRulesWithMultipleNonterminalsTest(TestCase):
         self.assertTrue(issubclass(to0, ContextFree.ChomskyTermNonterminal))
         self.assertTrue(issubclass(to1, ContextFree.ChomskyTermNonterminal))
         to0R = list(filter(lambda r: r.right == [0], com.rules()))[0]
-        to1R = list(filter(lambda r: r.right == [0], com.rules()))[0]
+        to1R = list(filter(lambda r: r.right == [1], com.rules()))[0]
         self.assertEqual(to0R.fromSymbol, to0)
         self.assertEqual(to1R.fromSymbol, to1)
         self.assertEqual(com.nonterms_count(), 3)
@@ -61,7 +61,7 @@ class MoreRulesWithMultipleNonterminalsTest(TestCase):
         self.assertTrue(issubclass(to0, ContextFree.ChomskyTermNonterminal))
         self.assertTrue(issubclass(to1, ContextFree.ChomskyTermNonterminal))
         to0R = list(filter(lambda r: r.right == [0], g.rules()))[0]
-        to1R = list(filter(lambda r: r.right == [0], g.rules()))[0]
+        to1R = list(filter(lambda r: r.right == [1], g.rules()))[0]
         self.assertEqual(to0R.fromSymbol, to0)
         self.assertEqual(to1R.fromSymbol, to1)
         self.assertEqual(g.nonterms_count(), 3)

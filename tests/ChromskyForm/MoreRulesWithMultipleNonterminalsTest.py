@@ -42,11 +42,11 @@ class MoreRulesWithMultipleNonterminalsTest(TestCase):
         tempB = fromB.right[1]
         fromBTemp = list(filter(lambda r: r.right == [S, A], com.rules()))[0]
         self.assertEqual(tempB, fromBTemp.fromSymbol)
-        self.assertEqual(com.nonterms_count(), 10)
-        self.assertEqual(len(com.nonterms()), 10)
+        self.assertEqual(com.nonterms_count(), 7)
+        self.assertEqual(len(com.nonterms()), 7)
 
     def test_transformShouldNotChange(self):
-        g = Grammar(nonterminals=[S, A,B,C],
+        g = Grammar(nonterminals=[S, A, B, C],
                     rules=[Rules])
         ContextFree.transform_to_chomsky_normal_form(g)
         self.assertEqual(g.rules_count(), 3)
@@ -73,8 +73,8 @@ class MoreRulesWithMultipleNonterminalsTest(TestCase):
         tempB = fromB.right[1]
         fromBTemp = list(filter(lambda r: r.right == [S, A], g.rules()))[0]
         self.assertEqual(tempB, fromBTemp.fromSymbol)
-        self.assertEqual(g.nonterms_count(), 10)
-        self.assertEqual(len(g.nonterms()), 10)
+        self.assertEqual(g.nonterms_count(), 7)
+        self.assertEqual(len(g.nonterms()), 7)
 
 if __name__ == '__main__':
     main()
