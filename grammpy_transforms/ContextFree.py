@@ -23,6 +23,8 @@ class ContextFree:
     ChomskyRule = ChomskyRule
     ChomskySplitRule = ChomskySplitRule
     ChomskyTermRule = ChomskyTermRule
+    ChomskyRestRule = ChomskyRestRule
+    ChomskyTerminalReplaceRule = ChomskyTerminalReplaceRule
 
     ChomskyNonterminal = ChomskyNonterminal
     ChomskyGroupNonterminal = ChomskyGroupNonterminal

@@ -40,12 +40,12 @@ class TerminalsFilling:
         self._items = dict()
         self._counter = 0
         for term in grammar.terms():
-            term = term.s
+            t = term.s
             created_nonterm = type("NonterminalForTerm" + str(self._counter), (ChomskyTermNonterminal,), ChomskyTermNonterminal.__dict__.copy())
-            created_nonterm.for_term = term
+            created_nonterm.for_term = t
             created_rule = type("RuleForTerm" + str(self._counter), (ChomskyTermRule,), ChomskyTermRule.__dict__.copy())
-            created_rule.rule = ([created_nonterm], [term])
-            self._items[term] = Container(term, created_nonterm, created_rule)
+            created_rule.rule = ([created_nonterm], [t])
+            self._items[t] = Container(term, created_nonterm, created_rule)
             self._counter += 1
 
     def get(self, term):
