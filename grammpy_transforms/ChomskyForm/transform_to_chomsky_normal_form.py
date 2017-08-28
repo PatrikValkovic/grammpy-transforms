@@ -78,7 +78,8 @@ def transform_to_chomsky_normal_form(grammar: Grammar, transform_grammar=False):
             #fill
             grammar.add_nonterm(created_nonterm)
             grammar.add_rule([created_left_rule, created_right_rule])
-            all_rules.append(created_left_rule, created_right_rule)
+            all_rules.append(created_left_rule)
+            all_rules.append(created_right_rule)
         # Check, if must replace terminal
         elif len(rule.right) == 2:
             if grammar.have_term(rule.right[0]):
