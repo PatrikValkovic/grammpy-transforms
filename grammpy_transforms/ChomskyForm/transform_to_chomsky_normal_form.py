@@ -14,8 +14,7 @@ from grammpy import *
 class ChomskyNonterminal(Nonterminal): pass
 class ChomskyGroupNonterminal(ChomskyNonterminal):
     group = []
-class ChomskyTermNonterminal(ChomskyNonterminal):
-    rewrite_to = None
+class ChomskyTermNonterminal(ChomskyNonterminal): pass
 class ChomskyRule(Rule): pass
 class ChomskySplitRule(ChomskyRule):
     from_rule = None
