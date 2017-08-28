@@ -7,18 +7,26 @@ Part of grammpy-transforms
 
 """
 
-from typing import Dict, List
+from typing import List
 from grammpy import *
 from .NongeneratingSymbolsRemove import *
 from .UnreachableSymbolsRemove import *
 from .EpsilonRulesRemove import *
 from .UnitRulesRemove import *
+from .ChomskyHiearchy import *
 
 
 class ContextFree:
 
     EpsilonRemovedRule = EpsilonRemovedRule
     ReducedUnitRule = ReducedUnitRule
+    ChomskyRule = ChomskyRule
+    ChomskySplitRule = ChomskySplitRule
+    ChomskyTermRule = ChomskyTermRule
+
+    ChomskyNonterminal = ChomskyNonterminal
+    ChomskyGroupNonterminal = ChomskyGroupNonterminal
+    ChomskyTermNonterminal = ChomskyTermNonterminal
 
     UnitSymbolRechablingResults = UnitSymbolRechablingResults
 

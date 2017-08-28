@@ -6,3 +6,5 @@
 Part of grammpy-transforms
 
 """
+
+from .transform_to_chomsky_normal_form import *
