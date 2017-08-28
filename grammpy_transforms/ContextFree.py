@@ -71,3 +71,7 @@ class ContextFree:
     @staticmethod
     def remove_unit_rules(grammar: Grammar, transform_grammar=False) -> Grammar:
         return remove_unit_rules(grammar, transform_grammar=transform_grammar)
+
+    @staticmethod
+    def transform_to_chomsky_normal_form(grammar: Grammar, transform_grammar=False) -> Grammar:
+        return transform_to_chomsky_normal_form(grammar, transform_grammar=transform_grammar)

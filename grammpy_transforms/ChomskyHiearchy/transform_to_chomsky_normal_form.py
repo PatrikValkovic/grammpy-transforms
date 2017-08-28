@@ -7,6 +7,7 @@ Part of grammpy-transforms
 
 """
 
+from copy import copy
 from grammpy import *
 
 
@@ -20,5 +21,9 @@ class ChomskySplitRule(ChomskyRule):
     from_rule = None
 class ChomskyTermRule(ChomskyRule): pass
 
+
+
 def transform_to_chomsky_normal_form(grammar: Grammar, transform_grammar=False):
+    # Copy if required
+    if transform_grammar is False: grammar = copy(grammar)
     raise NotImplementedError()
