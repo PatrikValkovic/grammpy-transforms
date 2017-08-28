@@ -13,7 +13,7 @@ from .NongeneratingSymbolsRemove import *
 from .UnreachableSymbolsRemove import *
 from .EpsilonRulesRemove import *
 from .UnitRulesRemove import *
-from .ChomskyHiearchy import *
+from .ChomskyForm import *
 
 
 class ContextFree:
