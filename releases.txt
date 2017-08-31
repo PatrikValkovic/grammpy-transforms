@@ -1,0 +1,8 @@
+
+This is a list of major changes in SDL's version history.
+
+---------------------------------------------------------------------------
+dev
+---------------------------------------------------------------------------
+
+* FIX: Add grammpy as dependency into setup.py file
