@@ -73,11 +73,11 @@ def transform_to_chomsky_normal_form(grammar: Grammar, transform_grammar=False):
             created_nonterm = type("GroupNonterminal"+str(index-1), (ChomskyGroupNonterminal,), ChomskyGroupNonterminal.__dict__.copy())
             created_nonterm.group = rule.right[1:]
             #create rule that replace current
-            created_left_rule = type("SplitRule"+str(index-1), (ChomskyRestRule,), ChomskyRestRule.__dict__.copy())
+            created_left_rule = type("SplitRule"+str(index-1), (ChomskySplitRule,), ChomskySplitRule.__dict__.copy())
             created_left_rule.rule = ([rule.fromSymbol], [rule.right[0], created_nonterm])
             created_left_rule.from_rule = rule
             #create rule with symbols on the right
-            created_right_rule = type("SplitTempRule" + str(index - 1), (ChomskySplitRule,), ChomskySplitRule.__dict__.copy())
+            created_right_rule = type("SplitTempRule" + str(index - 1), (ChomskyRestRule,), ChomskyRestRule.__dict__.copy())
             created_right_rule.rule = ([created_nonterm], rule.right[1:])
             created_right_rule.from_rule = rule
             #fill
@@ -91,7 +91,7 @@ def transform_to_chomsky_normal_form(grammar: Grammar, transform_grammar=False):
                 #first symbol is terminal
                 grammar.remove_rule(rule)
                 symb = fill.get(rule.right[0])
-                created = type("SplitRule"+str(index-1), (ChomskyTerminalReplaceRule,), ChomskyTerminalReplaceRule.__dict__.copy())
+                created = type("LeftReplaceRule"+str(index-1), (ChomskyTerminalReplaceRule,), ChomskyTerminalReplaceRule.__dict__.copy())
                 created.rule = ([rule.fromSymbol], [symb, rule.right[1]])
                 created.from_rule = rule
                 created.replaced_index = 0
@@ -102,7 +102,7 @@ def transform_to_chomsky_normal_form(grammar: Grammar, transform_grammar=False):
                 #second symbol is terminal
                 grammar.remove_rule(rule)
                 symb = fill.get(rule.right[1])
-                created = type("SplitRule" + str(index - 1), (ChomskyTerminalReplaceRule,), ChomskyTerminalReplaceRule.__dict__.copy())
+                created = type("RightReplaceRule" + str(index - 1), (ChomskyTerminalReplaceRule,), ChomskyTerminalReplaceRule.__dict__.copy())
                 created.rule = ([rule.fromSymbol], [rule.right[0], symb])
                 created.from_rule = rule
                 created.replaced_index = 1
