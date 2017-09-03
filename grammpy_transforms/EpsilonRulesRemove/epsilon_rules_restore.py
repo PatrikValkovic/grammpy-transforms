@@ -24,6 +24,19 @@ class Adding:
                 child_rules.append(child.to_rule)
         return child_rules
 
+def _restore_tree_for(root: Nonterminal, translate: dict):
+    if root is EPSILON:
+        return EPSILON
+    created_nonterm = root()  # type: Nonterminal
+    created_rule = translate[root]()  # type: Rule
+    created_nonterm._set_to_rule(created_rule)
+    created_rule._from_symbols.append(created_nonterm)
+    for ch in created_rule.right:
+        p = _restore_tree_for(ch, translate)  # type: Nonterminal
+        if p is not EPSILON:
+            p._set_from_rule(created_rule)
+        created_rule._to_symbols.append(p)
+    return created_nonterm
 
 def epsilon_rules_restore(root: Nonterminal):
     stack = list()
@@ -47,7 +60,10 @@ def epsilon_rules_restore(root: Nonterminal):
                 ch._set_from_rule(created_rule)
                 created_rule._to_symbols.append(ch)
             #Add epsilon
-            created_rule._to_symbols.append(EPSILON)
+            symb = _restore_tree_for(created_rule.right[proc.rule.replace_index], proc.rule.backtrack) # type: Nonterminal
+            created_rule._to_symbols.append(symb)
+            if symb is not EPSILON:
+                symb._set_from_rule(created_rule)
             #Add rest of childs
             for i in range(proc.rule.replace_index, len(proc.rule.to_symbols)):
                 ch = proc.rule.to_symbols[i]  # type: Nonterminal
