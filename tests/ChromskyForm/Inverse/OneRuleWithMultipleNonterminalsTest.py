@@ -27,8 +27,10 @@ class RuleC2(Rule):
 
 class OneRuleWithMultipleNonterminalsTest(TestCase):
     def test_transform(self):
-        g = Grammar(nonterminals=[S, A, B, C],
-                    rules=[RuleSABC, RuleA0, RuleB1, RuleC2])
+        g = Grammar(terminals=[0, 1, 2],
+                    nonterminals=[S, A, B, C],
+                    rules=[RuleSABC, RuleA0, RuleB1, RuleC2],
+                    start_symbol=S)
         com = ContextFree.transform_to_chomsky_normal_form(g)
         pars = cyk(com, [0, 1, 2])
         trans = InverseContextFree.transform_from_chomsky_normal_form(pars)
