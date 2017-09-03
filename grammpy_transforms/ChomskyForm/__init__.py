@@ -8,3 +8,4 @@ Part of grammpy-transforms
 """
 
 from .transform_to_chomsky_normal_form import *
+from .transform_from_chomsky_normal_form import transform_from_chomsky_normal_form
