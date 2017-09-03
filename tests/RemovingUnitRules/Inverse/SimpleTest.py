@@ -88,7 +88,7 @@ class SimpleTest(TestCase):
     def test_repeatOfC(self):
         g = Grammar(terminals=[0, 1, 2, 3],
                     nonterminals=[S, A, B, C, D],
-                    rules=[RuleSA, RuleSB, RuleAC, RuleA0A, RuleA1S, RuleBD, RuleB2B,
+                    rules=[RuleSA, RuleSB, RuleAC, RuleA0A, RuleBD, RuleB2B,
                            RuleB3S, RuleC1C, RuleC0, RuleD3D, RuleD2],
                     start_symbol=S)
         gr = ContextFree.transform_to_chomsky_normal_form(ContextFree.remove_unit_rules(g))
@@ -104,12 +104,12 @@ class SimpleTest(TestCase):
         self.assertIsInstance(c.to_rule, RuleC1C)
         self.assertIsInstance(c.to_rule.to_symbols[0], Terminal)
         self.assertEqual(c.to_rule.to_symbols[0].s, 1)
-        c = a.to_rule.to_symbols[1]
+        c = c.to_rule.to_symbols[1]
         self.assertIsInstance(c, C)
         self.assertIsInstance(c.to_rule, RuleC1C)
         self.assertIsInstance(c.to_rule.to_symbols[0], Terminal)
         self.assertEqual(c.to_rule.to_symbols[0].s, 1)
-        c = a.to_rule.to_symbols[1]
+        c = c.to_rule.to_symbols[1]
         self.assertIsInstance(c, C)
         self.assertIsInstance(c.to_rule, RuleC0)
         self.assertIsInstance(c.to_rule.to_symbols[0], Terminal)
