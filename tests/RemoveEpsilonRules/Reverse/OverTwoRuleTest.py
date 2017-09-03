@@ -21,13 +21,6 @@ class RuleABC(Rule): rule = ([A], [B, C])
 class RuleBC(Rule): rule = ([B], [C])
 class RuleCEps(Rule): rule = ([C], [EPS])
 
-"""
-S->1B   A->1B   A->eps  B->eps  B->1C   C->11
-ToEpsilon: A,B
-S->1B   A->1B   A->eps  B->eps  B->1C   C->11   S->1    A->1
-                ------  ------                  ++++    ++++
-"""
-
 
 class SimpleTestoverUnitRule(TestCase):
     def test_simpleTestOverUnitRule(self):
