@@ -7,11 +7,10 @@ Part of grammpy-transforms
 
 """
 
-from typing import List
-from grammpy import Grammar, EPSILON, Nonterminal
+from grammpy import Grammar, EPSILON
 
 
-def find_nonterminals_rewritable_to_epsilon(grammar: Grammar) -> List[Nonterminal]:
+def find_nonterminals_rewritable_to_epsilon(grammar: Grammar) -> dict:
     rewritable = dict()
     rewritable[EPSILON] = None
     while True:
