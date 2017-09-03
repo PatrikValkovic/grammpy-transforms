@@ -122,6 +122,14 @@ When splitting, ChomskySplitRule and ChomskyRestRule represent original whole ru
 Class have `from_rule` property that stores original rule and `replace_index` property, that indicate which terminal were replace.
 - `ContextFree.ChomskyTermRule`: It is class for rule, that directly rewrite nonterminal to terminal.
 
+### Inverse operations
+
+Eliminating of epsilon rules, removing of unit rules and transforming into Chomsky normal form have their inverse operations.
+They are implemented on `InverseContextFree` class.
+
+That functions needs just root nonterminal of parsed tree. They then traverse the parse tree and replace rules created by transformations by their original equivalent.
+
+The operations needs to be perform in opposite order, that transformations occurs.
 
 ## Context grammars
 
