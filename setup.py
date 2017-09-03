@@ -1,6 +1,6 @@
 from setuptools import setup
 
-v = '1.0.0'
+v = '1.1.0'
 
 setup(
     name='grammpy-transforms',
