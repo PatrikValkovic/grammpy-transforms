@@ -8,4 +8,4 @@ Part of grammpy-transforms
 """
 
 from .ContextFree import ContextFree
-from .InverseContextFree import InverseContextree
+from .InverseContextFree import InverseContextFree
