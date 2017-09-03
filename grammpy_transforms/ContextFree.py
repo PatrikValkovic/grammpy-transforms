@@ -15,6 +15,8 @@ from .EpsilonRulesRemove import *
 from .UnitRulesRemove import *
 from .ChomskyForm import *
 
+__all__ = ['ContextFree']
+
 
 class ContextFree:
 

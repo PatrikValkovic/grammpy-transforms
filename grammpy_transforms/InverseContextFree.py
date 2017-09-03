@@ -12,8 +12,10 @@ from .UnitRulesRemove import unit_rules_restore
 from .EpsilonRulesRemove import epsilon_rules_restore
 from .ChomskyForm import transform_from_chomsky_normal_form
 
-class InverseContextree:
+__all__ = ['InverseContextFree']
 
+
+class InverseContextFree:
     @staticmethod
     def unit_rules_restore(root: Nonterminal) -> Nonterminal:
         return unit_rules_restore(root)
