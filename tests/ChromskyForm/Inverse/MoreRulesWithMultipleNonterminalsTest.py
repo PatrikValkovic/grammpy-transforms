@@ -94,7 +94,7 @@ class MoreRulesWithMultipleNonterminalsTest(TestCase):
         self.assertEqual(b.to_rule.to_symbols[2].to_rule.to_symbols[0].s, 1)
         self.assertIsInstance(pars.to_rule.to_symbols[2], C)
         self.assertIsInstance(pars.to_rule.to_symbols[2].to_rule, RuleC3)
-        self.assertIsInstance(pars.to_rule.to_symbols[2].toRule.to_symbols[0], Terminal)
+        self.assertIsInstance(pars.to_rule.to_symbols[2].to_rule.to_symbols[0], Terminal)
         self.assertEqual(pars.to_rule.to_symbols[2].to_rule.to_symbols[0].s, 3)
 
 

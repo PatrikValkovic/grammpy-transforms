@@ -40,15 +40,15 @@ class OneRuleWithMultipleNonterminalsTest(TestCase):
         b = trans.to_rule.to_symbols[1]
         c = trans.to_rule.to_symbols[2]
         self.assertIsInstance(a, A)
-        self.assertIs(a.to_rule, RuleA0)
+        self.assertIsInstance(a.to_rule, RuleA0)
         self.assertIsInstance(a.to_rule.to_symbols[0], Terminal)
         self.assertEqual(a.to_rule.to_symbols[0].s, 0)
         self.assertIsInstance(b, B)
-        self.assertIs(b.to_rule, RuleB1)
+        self.assertIsInstance(b.to_rule, RuleB1)
         self.assertIsInstance(b.to_rule.to_symbols[0], Terminal)
         self.assertEqual(b.to_rule.to_symbols[0].s, 1)
         self.assertIsInstance(c, C)
-        self.assertIs(c.to_rule, RuleC2)
+        self.assertIsInstance(c.to_rule, RuleC2)
         self.assertIsInstance(c.to_rule.to_symbols[0], Terminal)
         self.assertEqual(c.to_rule.to_symbols[0].s, 2)
 
