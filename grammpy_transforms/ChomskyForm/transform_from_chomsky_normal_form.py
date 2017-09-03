@@ -55,5 +55,20 @@ def transform_from_chomsky_normal_form(root: Nonterminal):
             add.processed = True
             stack.append(add)
         elif isinstance(proc.rule, ChomskySplitRule):
-            raise NotImplementedError()
+            created_rule = proc.rule.from_rule()  # type: Rule
+            #parent nonterminals
+            for p in proc.rule.from_symbols:  # type: Nonterminal
+                p._set_to_rule(created_rule)
+                created_rule._from_symbols.append(p)
+            #left child
+            left_child = proc.rule.to_symbols[0] # type: Nonterminal
+            left_child._set_from_rule(created_rule)
+            created_rule._to_symbols.append(left_child)
+            #right childs
+            for ch in proc.rule.to_symbols[1].to_rule.to_symbols:  # type: Nonterminal
+                ch._set_from_rule(created_rule)
+                created_rule.to_symbols.append(ch)
+            add = Adding(created_rule)
+            add.processed = True
+            stack.append(add)
     return root
