@@ -15,7 +15,7 @@ from .find_symbols_reachable_by_unit_rules import find_nonterminals_reachable_by
 
 
 class ReducedUnitRule(Rule):
-    by_rules = []  # type: List[Rule]
+    by_rules = []  # type: List[type]
     end_rule = None  # type: Rule
 
 

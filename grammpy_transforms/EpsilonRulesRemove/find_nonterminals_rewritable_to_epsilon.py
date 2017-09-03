@@ -7,20 +7,21 @@ Part of grammpy-transforms
 
 """
 
-from typing import List
-from grammpy import Grammar, EPSILON, Nonterminal
+from grammpy import Grammar, EPSILON
 
 
-def find_nonterminals_rewritable_to_epsilon(grammar: Grammar) -> List[Nonterminal]:
-    rewritable = {EPSILON}
+def find_nonterminals_rewritable_to_epsilon(grammar: Grammar) -> dict:
+    rewritable = dict()
+    rewritable[EPSILON] = None
     while True:
         working = rewritable.copy()
         for rule in grammar.rules():
             allRewritable = True
             for symbol in rule.right:
                 if symbol not in rewritable: allRewritable = False
-            if allRewritable: working.add(rule.fromSymbol)
+            if allRewritable and rule.fromSymbol not in working:
+                working[rule.fromSymbol] = rule
         if working == rewritable: break
         rewritable = working
-    rewritable.remove(EPSILON)
-    return [i for i in rewritable]
+    del rewritable[EPSILON]
+    return rewritable

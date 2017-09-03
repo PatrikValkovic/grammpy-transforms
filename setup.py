@@ -14,5 +14,8 @@ setup(
     license='GNU General Public License v3.0',
     author='Patrik Valkovic',
     author_email='patrik.valkovic@hotmail.cz',
-    description='Set of transformations for grammpy library.'
+    description='Set of transformations for grammpy library.',
+    install_requires=[
+        'grammpy',
+    ],
 )

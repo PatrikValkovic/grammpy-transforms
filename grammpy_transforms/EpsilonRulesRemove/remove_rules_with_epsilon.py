@@ -15,8 +15,9 @@ from .find_nonterminals_rewritable_to_epsilon import find_nonterminals_rewritabl
 class EpsilonRemovedRule(Rule):
     from_rule = None  # type: Rule
     replace_index = None  # type: int
+    backtrack = None  # type: dict
 
-def _create_rule(rule: Rule, index: int) -> EpsilonRemovedRule:
+def _create_rule(rule: Rule, index: int, backtrack: dict) -> EpsilonRemovedRule:
     # Remove old rules
     old_dict = rule.__dict__.copy()
     if 'rules' in old_dict: del old_dict['rules']
@@ -30,6 +31,7 @@ def _create_rule(rule: Rule, index: int) -> EpsilonRemovedRule:
     # Add from_rule and index
     created.from_rule = rule
     created.replace_index = index
+    created.backtrack = backtrack
     # Add rule
     created.fromSymbol = rule.fromSymbol
     created.right = [rule.right[i] for i in range(len(rule.right)) if i != index]
@@ -41,7 +43,7 @@ def remove_rules_with_epsilon(grammar: Grammar, transform_grammar=False) -> Gram
     # Copy if required
     if transform_grammar is False: grammar = copy(grammar)
     # Find nonterminals rewritable to epsilon
-    rewritable = set(find_nonterminals_rewritable_to_epsilon(grammar))
+    rewritable = find_nonterminals_rewritable_to_epsilon(grammar)
     # Create list from rules
     rules = list(grammar.rules())
     index = 0
@@ -57,7 +59,7 @@ def remove_rules_with_epsilon(grammar: Grammar, transform_grammar=False) -> Gram
         for rule_index in range(len(right)):
             symbol = right[rule_index]
             if symbol in rewritable:
-                new_rule = _create_rule(rule, rule_index)
+                new_rule = _create_rule(rule, rule_index, rewritable)
                 rules.append(new_rule)
                 grammar.add_rule(new_rule)
     return grammar
