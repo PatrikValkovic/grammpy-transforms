@@ -42,7 +42,5 @@ class WithNonterminalsTest(TestCase):
         self.assertIsInstance(b.to_rule, Rules)
 
 
-
-
 if __name__ == '__main__':
     main()
