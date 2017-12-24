@@ -18,5 +18,5 @@ def splitted_rules(root: Nonterminal):
         if not isinstance(i, SplitRule):
             continue
         newRule = i.from_rule()
-        Manipulations.replaceRule(i, newRule)
+        Manipulations.replace(i, newRule)
     return root

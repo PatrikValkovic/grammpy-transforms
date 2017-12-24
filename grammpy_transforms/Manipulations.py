@@ -26,12 +26,14 @@ class Manipulations:
 
     @staticmethod
     def replaceNode(oldNode: Nonterminal, newNode: Nonterminal):
-        indexParent = oldNode.from_rule.to_symbols.index(oldNode)
-        indexChild = oldNode.to_rule.from_symbols.index(oldNode)
-        oldNode.from_rule.to_symbols[indexParent] = newNode
-        newNode._set_from_rule(oldNode.from_rule)
-        oldNode.to_rule.from_symbols[indexChild] = newNode
-        newNode._set_to_rule(oldNode.to_rule)
+        if oldNode.from_rule is not None and len(oldNode.from_rule.to_symbols) > 0:
+            indexParent = oldNode.from_rule.to_symbols.index(oldNode)
+            oldNode.from_rule.to_symbols[indexParent] = newNode
+            newNode._set_from_rule(oldNode.from_rule)
+        if oldNode.to_rule is not None and len(oldNode.to_rule.from_symbols) > 0:
+            indexChild = oldNode.to_rule.from_symbols.index(oldNode)
+            oldNode.to_rule._from_symbols[indexChild] = newNode
+            newNode._set_to_rule(oldNode.to_rule)
         return newNode
 
     @staticmethod
