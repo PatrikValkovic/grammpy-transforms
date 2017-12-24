@@ -14,7 +14,32 @@ from grammpy import Rule, Nonterminal, Terminal
 
 
 class Manipulations:
-    pass
+    @staticmethod
+    def replaceRule(oldRule: Rule, newRule: Rule) -> Rule:
+        for par in oldRule.from_symbols:
+            par._set_to_rule(newRule)
+            newRule._from_symbols.append(par)
+        for ch in oldRule.to_symbols:
+            ch._set_from_rule(newRule)
+            newRule._to_symbols.append(ch)
+        return newRule
+
+    @staticmethod
+    def replaceNode(oldNode: Nonterminal, newNode: Nonterminal):
+        indexParent = oldNode.from_rule.to_symbols.index(oldNode)
+        indexChild = oldNode.to_rule.from_symbols.index(oldNode)
+        oldNode.from_rule.to_symbols[indexParent] = newNode
+        newNode._set_from_rule(oldNode.from_rule)
+        oldNode.to_rule.from_symbols[indexChild] = newNode
+        newNode._set_to_rule(oldNode.to_rule)
+        return newNode
+
+    @staticmethod
+    def replace(oldEl, newEl):
+        if isinstance(oldEl, Rule):
+            return Manipulations.replaceRule(oldEl, newEl)
+        if isinstance(oldEl, (Nonterminal, Terminal)):
+            return Manipulations.replaceNode(oldEl, newEl)
 
 class Traversing:
     @staticmethod

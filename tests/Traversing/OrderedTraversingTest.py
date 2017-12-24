@@ -31,7 +31,7 @@ class OrderedTraversingTest(TestCase):
         self.assertIsInstance(resp[0], A)
         self.assertIsInstance(resp[1], Rules)
         self.assertIsInstance(resp[2], Terminal)
-        self.assertEquals(resp[2].s, 0)
+        self.assertEqual(resp[2].s, 0)
 
     def testTraversePostOrder(self):
         g = Grammar(terminals=[0],
@@ -43,7 +43,7 @@ class OrderedTraversingTest(TestCase):
         self.assertIsInstance(resp[2], A)
         self.assertIsInstance(resp[1], Rules)
         self.assertIsInstance(resp[0], Terminal)
-        self.assertEquals(resp[0].s, 0)
+        self.assertEqual(resp[0].s, 0)
 
 if __name__ == '__main__':
     main()

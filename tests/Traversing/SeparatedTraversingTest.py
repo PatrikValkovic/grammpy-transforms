@@ -71,7 +71,7 @@ class SeparatedTraversingTest(TestCase):
         self.assertIsInstance(resp[0], A)
         self.assertIsInstance(resp[1], Rules)
         self.assertIsInstance(resp[2], Terminal)
-        self.assertEquals(resp[2].s, 0)
+        self.assertEqual(resp[2].s, 0)
 
 
 
