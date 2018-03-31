@@ -14,15 +14,14 @@ from ..Manipulations import Manipulations, Traversing
 
 def _restore_tree_for(root: Nonterminal, translate: dict):
     if root is EPSILON:
-        return EPSILON
+        return Terminal(EPSILON, None)
     created_nonterm = root()  # type: Nonterminal
     created_rule = translate[root]()  # type: Rule
     created_nonterm._set_to_rule(created_rule)
     created_rule._from_symbols.append(created_nonterm)
     for ch in created_rule.right:
         p = _restore_tree_for(ch, translate)  # type: Nonterminal
-        if p is not EPSILON:
-            p._set_from_rule(created_rule)
+        p._set_from_rule(created_rule)
         created_rule._to_symbols.append(p)
     return created_nonterm
 

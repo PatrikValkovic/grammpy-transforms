@@ -41,14 +41,14 @@ class SimpleTestoverUnitRule(TestCase):
         c = a.to_rule.to_symbols[1]
         self.assertIsInstance(c, C)
         self.assertIsInstance(c.to_rule, RuleCEps)
-        self.assertIs(c.to_rule.to_symbols[0], EPS)
+        self.assertIs(c.to_rule.to_symbols[0].s, EPS)
         b = a.to_rule.to_symbols[0]
         self.assertIsInstance(b, B)
         self.assertIsInstance(b.to_rule, RuleBC)
         c = b.to_rule.to_symbols[0]
         self.assertIsInstance(c, C)
         self.assertIsInstance(c.to_rule, RuleCEps)
-        self.assertIs(c.to_rule.to_symbols[0], EPS)
+        self.assertIs(c.to_rule.to_symbols[0].s, EPS)
 
 
 if __name__ == '__main__':

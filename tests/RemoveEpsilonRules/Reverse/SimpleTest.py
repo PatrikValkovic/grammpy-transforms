@@ -47,7 +47,7 @@ class SimpleTest(TestCase):
         b = s.to_rule.to_symbols[1]
         self.assertIsInstance(b, B)
         self.assertIsInstance(b.to_rule, RuleBEps)
-        self.assertIs(b.to_rule.to_symbols[0], EPS)
+        self.assertIs(b.to_rule.to_symbols[0].s, EPS)
 
 
 if __name__ == '__main__':
