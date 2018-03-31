@@ -55,7 +55,8 @@ def remove_rules_with_epsilon(grammar: Grammar, transform_grammar=False) -> Gram
         if right == [EPSILON]:
             if not grammar.start_isSet() or rule.fromSymbol != grammar.start_get():
                 grammar.remove_rule(rule)
-            continue
+            # Continue IS executed, but due optimalization line is marked as missed.
+            continue #pragma: no cover
         for rule_index in range(len(right)):
             symbol = right[rule_index]
             if symbol in rewritable:

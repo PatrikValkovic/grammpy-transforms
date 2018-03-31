@@ -133,13 +133,76 @@ That functions needs just root nonterminal of parsed tree. They then traverse th
 
 The operations needs to be perform in opposite order, that transformations occurs.
 
-## Context grammars
+### Split rules
 
-Not implemented.
+Because Grammar class split rules, which represents more than two rules,
+there is need for algorithm, that replace splitted rule with the original one.
+This algorithm is implemented on `InverseCommon` class as `splitted_rules` static method.
 
-## Unrestricted grammars
+This call must be call as the last one. Also, you dont need to call this, if all of your rules have just single rule defined.
 
-Not implemented.
+Algorithm is for now implemented only for Context-Free grammars.
+
+In the following release of grammpy library, splitted rules should behave same as their original counterparts.
+This method will than reflect it and may have empty implementation in the future.
+
+## Helpers
+
+Library provide from version 1.2.0 classes, that helps with parsed tree manipulation and traversing.
+
+Class `Manipulation` can replace specific rule, nonterminal or terminal with different one.
+The new element will be added into parsed tree and correctly connected to rest of the elements.
+
+```python
+from grammpy_transforms import Manipulation
+# ...
+parsed = cyk(...)
+Manipulation.replaceNode(parsed, MyNewNonterminal())
+Manipulation.replaceRule(parsed.to_rule, MyNewRule())
+# or use type deductions
+Manipulation.replace(parsed, MyNewNonterminal())
+Manipulation.replace(parsed.to_rule, MyNewRule())
+```
+
+Second class is `Traversing`. It contains static methods for post order and pre order traversing.
+Methods traverse throught nonterminals, terminals and even the rules. If you want to traverse just nonterminals, use the `filter` buildin function.
+
+```python
+from grammpy_transforms import Traversing
+# ...
+Traversing.postOrder(parsed)
+Traversing.preOrder(parsed)
+```
+
+You can create your own traversing path by calling `traverse` static method.
+Method accept root of the parsed tree and function accepting current traversing node and callback.
+Passed method must call callback with every node you want to traverse.
+
+```python
+from grammpy_transforms import Traversing
+# ...
+def post_order_traversing(elem, callback):
+    if isinstance(elem, Nonterminal):
+        for ch in elem.to_rule.to_symbols:
+            yield callback(ch)
+        yield ch
+
+Traversing.traverse(parsed, post_order_traversing)
+```
+
+Alternatively, you can use `traverseSeparated` static method, that call different functions for nonterminals, terminals and rules.
+
+```python
+def postOrder(root):
+    def travRule(item, callback):
+        resp = [callback(ch) for ch in item.to_symbols]
+        return functools.reduce(operator.add, resp, []) + [item]
+    def travNonterm(item, callback):
+        return callback(item.to_rule) + [item]
+    def travTerm(item, callback):
+        return [item]
+return Traversing.traverseSeparated(root, travRule, travNonterm, travTerm)
+```
 
 ## Roadmap
 

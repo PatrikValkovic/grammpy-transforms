@@ -81,7 +81,8 @@ class SimpleTest(TestCase):
     def test_simpleTestShouldChange(self):
         g = Grammar(terminals=[1],
                     nonterminals=[S, A, B, C],
-                    rules=[Rules])
+                    rules=[Rules],
+                    start_symbol=S)
         ContextFree.remove_rules_with_epsilon(g, transform_grammar=True)
         self.assertEqual(g.rules_count(), 6)
         class RuleNewS(Rule): rule=([S], [1])
