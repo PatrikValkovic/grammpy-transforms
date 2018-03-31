@@ -1,9 +1,17 @@
 
-This is a list of major changes in SDL's version history.
+This is a list of major changes in version history.
 
 ---------------------------------------------------------------------------
 dev
 ---------------------------------------------------------------------------
 
+
+---------------------------------------------------------------------------
+v1.2.0
+---------------------------------------------------------------------------
+
 * FIX: Add grammpy as dependency into setup.py file
 * ADD: Inverse functions to grammar transformations
+* ADD: Inversion of splitting grammars
+* ADD: Traversing class for traversing the parsed tree
+* ADD: Manipulations class for changing nodes in the parsed tree
