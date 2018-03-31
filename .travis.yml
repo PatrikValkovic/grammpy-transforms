@@ -5,7 +5,6 @@ python:
 # command to install dependencies
 install:
 - pip install coverage python-coveralls pyparsers #grammpy
-- pip install -e git+https://github.com/PatrikValkovic/grammpy@dev#egg=grammpy
 
 # command to run tests with coverage
 script:
