@@ -5,10 +5,15 @@ v = '1.2.1'
 setup(
     name='grammpy-transforms',
     version=v,
-    packages=['grammpy_transforms',
-              'grammpy_transforms.ChomskyForm', 'grammpy_transforms.UnitRulesRemove',
-              'grammpy_transforms.EpsilonRulesRemove', 'grammpy_transforms.UnreachableSymbolsRemove',
-              'grammpy_transforms.NongeneratingSymbolsRemove'],
+    packages=[
+        'grammpy_transforms',
+        'grammpy_transforms.ChomskyForm',
+        'grammpy_transforms.UnitRulesRemove',
+        'grammpy_transforms.EpsilonRulesRemove',
+        'grammpy_transforms.UnreachableSymbolsRemove',
+        'grammpy_transforms.NongeneratingSymbolsRemove',
+        'grammpy_transforms.SplittedRules'
+    ],
     url='https://github.com/PatrikValkovic/grammpy-transforms',
     download_url='https://github.com/PatrikValkovic/grammpy-transforms/archive/v' + v + '.tar.gz',
     license='GNU General Public License v3.0',
