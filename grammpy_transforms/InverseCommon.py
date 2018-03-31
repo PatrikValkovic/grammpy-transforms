@@ -7,7 +7,7 @@ Part of grammpy-transforms
 
 """
 
-from .SplittedRules import *
+from .SplittedRules import splitted_rules
 
 class InverseCommon:
 
