@@ -151,7 +151,7 @@ Library provide from version 1.2.0 classes, that helps with parsed tree manipula
 Class `Manipulation` can replace specific rule, nonterminal or terminal with different one.
 The new element will be added into parsed tree and correctly connected to rest of the elements.
 
-```python3
+```python
 from grammpy_transforms import Manipulation
 # ...
 parsed = cyk(...)
@@ -165,7 +165,7 @@ Manipulation.replace(parsed.to_rule, MyNewRule())
 Second class is `Traversing`. It contains static methods for post order and pre order traversing.
 Methods traverse throught nonterminals, terminals and even the rules. If you want to traverse just nonterminals, use the `filter` buildin function.
 
-```python3
+```python
 from grammpy_transforms import Traversing
 # ...
 Traversing.postOrder(parsed)
@@ -176,7 +176,7 @@ You can create your own traversing path by calling `traverse` static method.
 Method accept root of the parsed tree and function accepting current traversing node and callback.
 Passed method must call callback with every node you want to traverse.
 
-```python3
+```python
 from grammpy_transforms import Traversing
 # ...
 def post_order_traversing(elem, callback):
@@ -190,7 +190,7 @@ Traversing.traverse(parsed, post_order_traversing)
 
 Alternatively, you can use `traverseSeparated` static method, that call different functions for nonterminals, terminals and rules.
 
-```python3
+```python
 def postOrder(root):
     def travRule(item, callback):
         resp = [callback(ch) for ch in item.to_symbols]
