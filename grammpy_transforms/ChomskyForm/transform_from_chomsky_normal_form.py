@@ -14,7 +14,7 @@ from ..Manipulations import Traversing, Manipulations
 
 def transform_from_chomsky_normal_form(root: Nonterminal):
     items = Traversing.postOrder(root)
-    items = filter(lambda x: isinstance(x, (ChomskyTermRule,ChomskyTerminalReplaceRule, ChomskySplitRule)), items)
+    items = filter(lambda x: isinstance(x, (ChomskyTermRule,ChomskyTerminalReplaceRule)), items)
     de = deque(items)
     while de:
         rule = de.popleft()
@@ -26,25 +26,26 @@ def transform_from_chomsky_normal_form(root: Nonterminal):
             to_append.to_symbols[index] = term
             term._set_from_rule(to_append)
         elif isinstance(rule, ChomskyTerminalReplaceRule):
-            to_rule = rule.from_rule()  # type: Rule
-            for p in rule.from_symbols:  # type: Nonterminal
-                to_rule._from_symbols.append(p)
-                p._set_to_rule(to_rule)
-            for c in rule.to_symbols:  # type: Nonterminal
-                to_rule._to_symbols.append(c)
-                c._set_from_rule(to_rule)
-            de.append(to_rule)
-        elif isinstance(rule, ChomskySplitRule):
             created_rule = rule.from_rule()  # type: Rule
-            #parent nonterminals
+            Manipulations.replaceRule(rule, created_rule)
+            de.append(created_rule)
+
+    items = Traversing.postOrder(root)
+    items = filter(lambda x: isinstance(x, ChomskySplitRule), items)
+    de = deque(items)
+    while de:
+        rule = de.popleft()
+        if isinstance(rule, ChomskySplitRule):
+            created_rule = rule.from_rule()  # type: Rule
+            # parent nonterminals
             for p in rule.from_symbols:  # type: Nonterminal
                 p._set_to_rule(created_rule)
                 created_rule._from_symbols.append(p)
-            #left child
-            left_child = rule.to_symbols[0] # type: Nonterminal
+            # left child
+            left_child = rule.to_symbols[0]  # type: Nonterminal
             left_child._set_from_rule(created_rule)
             created_rule._to_symbols.append(left_child)
-            #right childs
+            # right childs
             for ch in rule.to_symbols[1].to_rule.to_symbols:  # type: Nonterminal
                 ch._set_from_rule(created_rule)
                 created_rule.to_symbols.append(ch)
