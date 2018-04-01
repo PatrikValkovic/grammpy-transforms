@@ -20,11 +20,8 @@ def transform_from_chomsky_normal_form(root: Nonterminal):
         rule = de.popleft()
         if isinstance(rule, ChomskyTermRule):
             upper_nonterm = rule.from_symbols[0]  # type: Nonterminal
-            to_append = upper_nonterm.from_rule  # type: Rule
-            index = to_append.to_symbols.index(upper_nonterm)
-            term = rule.to_symbols[0]  # type: Terminal
-            to_append.to_symbols[index] = term
-            term._set_from_rule(to_append)
+            term = rule.to_symbols[0]
+            Manipulations.replaceNode(upper_nonterm, term)
         elif isinstance(rule, ChomskyTerminalReplaceRule):
             created_rule = rule.from_rule()  # type: Rule
             Manipulations.replaceRule(rule, created_rule)

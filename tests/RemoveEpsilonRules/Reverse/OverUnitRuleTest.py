@@ -47,7 +47,7 @@ class SimpleTestoverUnitRule(TestCase):
         a = s.to_rule.to_symbols[1]
         self.assertIsInstance(a, A)
         self.assertIsInstance(a.to_rule, RuleAEps)
-        self.assertIs(a.to_rule.to_symbols[0], EPS)
+        self.assertIs(a.to_rule.to_symbols[0].s, EPS)
 
 
 if __name__ == '__main__':
