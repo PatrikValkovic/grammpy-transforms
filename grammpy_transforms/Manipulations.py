@@ -82,3 +82,36 @@ class Traversing:
         def travTerms(item, callback):
             return [item]
         return Traversing.traverseSeparated(root, travRule, travNonterminals, travTerms)
+
+    @staticmethod
+    def print(root, previous=0, defined = [], is_last = False):
+        ret = ''
+
+        if previous != 0:
+            for i in range(previous-1):
+                if i in defined:
+                    ret += '|  '
+                else:
+                    ret += '   '
+            ret += '`--' if is_last else '|--';
+
+        if isinstance(root, Nonterminal):
+            ret += '(N)' + root.__class__.__name__ + '\n'
+            ret += Traversing.print(root.to_rule, previous+1, defined, True)
+        elif isinstance(root, Terminal):
+            ret += '(T)' +str(root.s) + '\n'
+            return ret
+        elif isinstance(root, Rule):
+            ret += '(R)' +root.__class__.__name__ + '\n'
+            defined.append(previous)
+            for i in range(len(root.to_symbols)-1):
+                ret += Traversing.print(root.to_symbols[i],
+                                        previous+1,
+                                        defined,
+                                        False)
+            defined.pop()
+            ret += Traversing.print(root.to_symbols[-1],
+                                    previous + 1,
+                                    defined,
+                                    True)
+        return ret

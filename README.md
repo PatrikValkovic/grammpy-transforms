@@ -1,6 +1,6 @@
 # grammpy-transforms [![Build Status](https://travis-ci.org/PatrikValkovic/grammpy-transforms.svg?branch=master)](https://travis-ci.org/PatrikValkovic/grammpy-transforms) [![Coverage Status](https://coveralls.io/repos/github/PatrikValkovic/grammpy-transforms/badge.svg?branch=master)](https://coveralls.io/github/PatrikValkovic/grammpy-transforms?branch=master)
 
-Version: 1.2.2
+Version: 1.2.3
 
 Package for transforming grammpy grammars. 
 
@@ -203,6 +203,26 @@ def postOrder(root):
         return [item]
 return Traversing.traverseSeparated(root, travRule, travNonterm, travTerm)
 ```
+
+Class Traverse also provide `print` static method, that returns string representing the structure of the AST.
+
+```text
+(R)ChomskySplitTempRule81
+|--(N)NoBracketExpression
+|  `--(R)ChomskySplitRule20
+|     |--(T)<class 'lambda_cli.terminals.LeftBracket'>
+|     `--(N)ChomskyGroupNonterminal20
+|        `--(R)ChomskySplitTempRule20
+|           |--(N)NoBracketExpression
+|           |  `--(R)ReducedSplitRules6
+|           |     |--(T)<lambda_cli.terminals.Variable object at 0x060818D0>
+|           |     `--(N)ExpressionBody
+|           |        `--(R)SplitRules7
+|           |           `--(T)<lambda_cli.terminals.Variable object at 0x060817D0>
+|           `--(T)<class 'lambda_cli.terminals.RightBracket'>
+`--(T)<class 'lambda_cli.terminals.RightBracket'>
+```
+
 
 ## Roadmap
 
