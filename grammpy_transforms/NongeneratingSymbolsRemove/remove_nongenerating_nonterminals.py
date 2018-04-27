@@ -11,6 +11,13 @@ from copy import copy
 from grammpy import Grammar, EPSILON
 
 def remove_nongenerating_nonterminals(grammar: Grammar, transform_grammar=False) -> Grammar:
+    """
+    Remove nongenerating symbols from the grammar
+    :param grammar: Grammar where to remove nongenerating symbols
+    :param transform_grammar: True if transformation should be performed in place, false otherwise.
+    False by default.
+    :return: Grammar without nongenerating symbols
+    """
     # Copy if required
     if transform_grammar is False: grammar = copy(grammar)
     # Create working sets

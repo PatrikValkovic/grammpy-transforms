@@ -13,6 +13,11 @@ from .transform_to_chomsky_normal_form import *
 from ..Manipulations import Traversing, Manipulations
 
 def transform_from_chomsky_normal_form(root: Nonterminal):
+    """
+    Transform rules created by Chomsky Normal Form to original rules used in grammar.
+    :param root: Root of AST
+    :return: Modified AST
+    """
     items = Traversing.postOrder(root)
     items = filter(lambda x: isinstance(x, (ChomskyTermRule,ChomskyTerminalReplaceRule)), items)
     de = deque(items)

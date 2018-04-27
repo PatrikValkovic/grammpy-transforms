@@ -13,11 +13,21 @@ from .find_nonterminals_rewritable_to_epsilon import find_nonterminals_rewritabl
 
 
 class EpsilonRemovedRule(Rule):
+    """
+    Represent rule, when one symbol of the original rule is rewritable to epsilon.
+    """
     from_rule = None  # type: Rule
     replace_index = None  # type: int
     backtrack = None  # type: dict
 
 def _create_rule(rule: Rule, index: int, backtrack: dict) -> EpsilonRemovedRule:
+    """
+    Create EpsilonRemovedRule
+    :param rule: Original rule
+    :param index: Index of symbol that is rewritable to epsilon
+    :param backtrack: Dictionary where key is nonterminal and value is rule which is next to generate epsilon.
+    :return: EpsilonRemovedRule class without symbol rewritable to epsilon
+    """
     # Remove old rules
     old_dict = rule.__dict__.copy()
     if 'rules' in old_dict: del old_dict['rules']
@@ -40,6 +50,13 @@ def _create_rule(rule: Rule, index: int, backtrack: dict) -> EpsilonRemovedRule:
     return created
 
 def remove_rules_with_epsilon(grammar: Grammar, transform_grammar=False) -> Grammar:
+    """
+    Remove epsilon rules.
+    :param grammar: Grammar where rules remove
+    :param transform_grammar: True if transformation should be performed in place, false otherwise.
+    False by default.
+    :return: Grammar without epsilon rules.
+    """
     # Copy if required
     if transform_grammar is False: grammar = copy(grammar)
     # Find nonterminals rewritable to epsilon

@@ -111,7 +111,7 @@ class ContextFree:
     @staticmethod
     def find_nonterminals_rewritable_to_epsilon(grammar: Grammar):
         """
-        Get nonterminal rewritable to epsilon.
+        Get nonterminals rewritable to epsilon.
         :param grammar: Grammar where to search.
         :return: Dictionary, where key is nonterminal rewritable to epsilon and value is rule that is responsible for it.
         """

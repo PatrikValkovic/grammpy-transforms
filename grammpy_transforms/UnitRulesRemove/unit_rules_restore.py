@@ -13,6 +13,11 @@ from ..Manipulations import Manipulations, Traversing
 
 
 def unit_rules_restore(root: Nonterminal):
+    """
+    Transform rules created by removing unit rules to original rules used in grammar.
+    :param root: Root of AST
+    :return: Modified AST
+    """
     items = Traversing.postOrder(root)
     items = filter(lambda x: isinstance(x, ReducedUnitRule), items)
     for rule in items:

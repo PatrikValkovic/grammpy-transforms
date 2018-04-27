@@ -12,7 +12,13 @@ from .remove_rules_with_epsilon import EpsilonRemovedRule
 from ..Manipulations import Manipulations, Traversing
 
 
-def _restore_tree_for(root: Nonterminal, translate: dict):
+def _restore_tree_for(root, translate):
+    """
+    Create part of AST that generate epsilon
+    :param root: Nonterminal for which generate epsilon
+    :param translate: Dictionary where key is nonterminal and value is rule which is next to generate epsilon.
+    :return: Nonterminal instance with part of AST generating epsilon.
+    """
     if root is EPSILON:
         return Terminal(EPSILON, None)
     created_nonterm = root()  # type: Nonterminal
@@ -26,6 +32,11 @@ def _restore_tree_for(root: Nonterminal, translate: dict):
     return created_nonterm
 
 def epsilon_rules_restore(root: Nonterminal):
+    """
+    Transform rules created by removing epsilon rules to original rules used in grammar.
+    :param root: Root of AST
+    :return: Modified AST
+    """
     items = Traversing.postOrder(root)
     items = filter(lambda x: isinstance(x, EpsilonRemovedRule), items)
     for rule in items:
