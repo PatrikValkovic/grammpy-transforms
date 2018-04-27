@@ -14,8 +14,17 @@ from grammpy import Rule, Nonterminal, Terminal
 
 
 class Manipulations:
+    """
+    Class that associate function modifying AST
+    """
     @staticmethod
     def replaceRule(oldRule: Rule, newRule: Rule) -> Rule:
+        """
+        Replace instance of Rule with another one
+        :param oldRule: Instance in AST
+        :param newRule: Instance to replace with
+        :return: New instance attached to AST
+        """
         for par in oldRule.from_symbols:
             par._set_to_rule(newRule)
             newRule._from_symbols.append(par)
@@ -26,6 +35,12 @@ class Manipulations:
 
     @staticmethod
     def replaceNode(oldNode: Nonterminal, newNode: Nonterminal):
+        """
+        Replace instance of Nonterminal or Terminal in AST with another one.
+        :param oldNode: Old nonterminal or terminal already in AST.
+        :param newNode: New symbol to replace the original one
+        :return: New symbol attached into AST
+        """
         if oldNode.from_rule is not None and len(oldNode.from_rule.to_symbols) > 0:
             indexParent = oldNode.from_rule.to_symbols.index(oldNode)
             oldNode.from_rule.to_symbols[indexParent] = newNode
@@ -38,20 +53,45 @@ class Manipulations:
 
     @staticmethod
     def replace(oldEl, newEl):
+        """
+        Replace element in AST
+        :param oldEl: Element already in AST
+        :param newEl: Element to replace with
+        :return: New element attached to AST
+        """
         if isinstance(oldEl, Rule):
             return Manipulations.replaceRule(oldEl, newEl)
         if isinstance(oldEl, (Nonterminal, Terminal)):
             return Manipulations.replaceNode(oldEl, newEl)
 
 class Traversing:
+    """
+    Class that associate function traversing AST
+    """
     @staticmethod
     def traverse(root, callback: Callable):
+        """
+        Traverse AST based on callback
+        :param root: Root element of the AST
+        :param callback: Function that accepts current node and callback c_2.
+        Function must return nodes you want to traverse.
+        Its possible to call callback c_2 on any node to make recursion.
+        :return: Sequence of nodes to traverse.
+        """
         def innerCallback(item):
             return callback(item, innerCallback)
         return callback(root, innerCallback)
 
     @staticmethod
     def traverseSeparated(root, callbackRules, callbackNonterminals, callbackTerminals):
+        """
+        Same as traverse method, but have different callbacks for rules, nonterminals and terminals
+        :param root: Root node of the AST
+        :param callbackRules: Callback to call for every rule
+        :param callbackNonterminals: Callback to call for every nonterminal
+        :param callbackTerminals: Callback to call for every terminal
+        :return: Sequence of nodes to traverse
+        """
         def separateTraverse(item, callback):
             if isinstance(item, Rule):
                 return callbackRules(item, callback)
@@ -63,6 +103,11 @@ class Traversing:
 
     @staticmethod
     def preOrder(root):
+        """
+        Perform pre-order traversing
+        :param root: Root tree of the AST
+        :return: Sequence of nodes to traverse
+        """
         def travRule(item, callback):
             resp = [callback(ch) for ch in item.to_symbols]
             return functools.reduce(operator.add, resp, [item])
@@ -74,6 +119,11 @@ class Traversing:
 
     @staticmethod
     def postOrder(root):
+        """
+        Perform post-order traversing
+        :param root: Root node of the AST
+        :return: Sequence of nodes to traverse
+        """
         def travRule(item, callback):
             resp = [callback(ch) for ch in item.to_symbols]
             return functools.reduce(operator.add, resp, []) + [item]
@@ -85,8 +135,25 @@ class Traversing:
 
     @staticmethod
     def print(root, previous=0, defined = [], is_last = False):
+        """
+        Print AST
+        :param root: Root node of AST
+        :return: String representing AST in form of tree
+        (R)SplitRules26
+        |--(N)Iterate
+        |  `--(R)SplitRules30
+        |     `--(N)Symb
+        |        `--(R)SplitRules4
+        |           `--(T)e
+        `--(N)Concat
+           `--(R)SplitRules27
+              `--(N)Iterate
+                 `--(R)SplitRules30
+                    `--(N)Symb
+                       `--(R)SplitRules5
+                          `--(T)f
+        """
         ret = ''
-
         if previous != 0:
             for i in range(previous-1):
                 if i in defined:
@@ -94,7 +161,6 @@ class Traversing:
                 else:
                     ret += '   '
             ret += '`--' if is_last else '|--';
-
         if isinstance(root, Nonterminal):
             ret += '(N)' + root.__class__.__name__ + '\n'
             ret += Traversing.print(root.to_rule, previous+1, defined, True)
