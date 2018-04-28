@@ -13,16 +13,35 @@ from grammpy import Grammar, Nonterminal, Rule
 
 
 class UnitSymbolRechablingResults:
+    """
+    Class containing info about unit rules.
+    """
     def __init__(self, field, translation):
+        """
+        Create isntance of UnitSymbolRechablingResults
+        :param field: Result of Floyd-Warshall algorithm
+        :param translation: Dictionary where keys is nonterminal and value is position in the field
+        """
         self.f = field  # type: List[List[List[Rule] | None]]
         self.t = translation  # type: Dict[Nonterminal, int]
 
     def reach(self, from_symbol: Nonterminal, to_symbol: Nonterminal) -> bool:
+        """
+        Check if exists sequence of unit rules between two symbols
+        :param from_symbol: From which symbol find
+        :param to_symbol:  To which symbol find
+        :return: True if exists sequence of unit rules, false otherwise
+        """
         if from_symbol not in self.t or to_symbol not in self.t:
             return False
         return self.f[self.t[from_symbol]][self.t[to_symbol]] is not None
 
     def reachables(self, from_symbol: Nonterminal) -> List[Nonterminal]:
+        """
+        Get list of nonterminals, what are rewritable from nonterminal passed as parameter by sequence of unit rules.
+        :param from_symbol: From which symbol to search
+        :return: List of nonterminals
+        """
         if from_symbol not in self.t:
             return []
         reachable = []
@@ -33,12 +52,23 @@ class UnitSymbolRechablingResults:
         return reachable
 
     def path_rules(self, from_symbol: Nonterminal, to_symbol: Nonterminal):
+        """
+        Get sequence of unit rules between first and second parameter
+        :param from_symbol: From which symbol
+        :param to_symbol: To which symbol
+        :return: Sequence of unit rules
+        """
         if from_symbol not in self.t or to_symbol not in self.t:
             return None
         return self.f[self.t[from_symbol]][self.t[to_symbol]]
 
 
 def find_nonterminals_reachable_by_unit_rules(grammar: Grammar) -> UnitSymbolRechablingResults:
+    """
+    Get nonterminal for which exist unit rule
+    :param grammar: Grammar where to search
+    :return: Instance of UnitSymbolRechablingResults.
+    """
     # Get nonterms
     nonterms = grammar.nonterms()
     l = len(nonterms)

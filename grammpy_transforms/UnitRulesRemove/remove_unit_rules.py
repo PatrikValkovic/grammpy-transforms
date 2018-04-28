@@ -15,17 +15,31 @@ from .find_symbols_reachable_by_unit_rules import find_nonterminals_reachable_by
 
 
 class ReducedUnitRule(Rule):
+    """
+    Represent rule that replace sequence of unit rules and last not unit rule
+    """
     by_rules = []  # type: List[type]
     end_rule = None  # type: Rule
 
 
 def _is_unit(rule):
+    """
+    Check if parameter is unit rule
+    :param rule: Object to check
+    :return: True if is parameter unit rule, false otherwise
+    """
     return len(rule.left) == 1 and len(rule.right) == 1 and \
            isclass(rule.fromSymbol) and isclass(rule.toSymbol) and \
            issubclass(rule.fromSymbol, Nonterminal) and issubclass(rule.toSymbol, Nonterminal)
 
 
 def _create_rule(path, rule):
+    """
+    Create ReducedUnitRule based on sequence of unit rules and end rule
+    :param path: Sequence of unit rules
+    :param rule: Rule that is attached after sequence of unit rules
+    :return: ReducedUnitRule class
+    """
     created = type("Reduced" + rule.__name__, (ReducedUnitRule,), ReducedUnitRule.__dict__.copy())
     created.rule = ([path[0].fromSymbol], rule.right)
     created.end_rule = rule
@@ -34,6 +48,13 @@ def _create_rule(path, rule):
 
 
 def remove_unit_rules(grammar, transform_grammar=False):
+    """
+    Remove unit rules from the grammar
+    :param grammar: Grammar where the rules remove
+    :param transform_grammar: True if transformation should be performed in place, false otherwise.
+    False by default.
+    :return: Grammar without unit rules.
+    """
     if transform_grammar is False: grammar = copy(grammar)
     # get connections
     res = find_nonterminals_reachable_by_unit_rules(grammar)

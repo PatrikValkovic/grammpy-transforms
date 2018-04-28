@@ -12,6 +12,11 @@ from grammpy.Grammars.MultipleRulesGrammar import SplitRule
 from ..Manipulations import Manipulations, Traversing
 
 def splitted_rules(root: Nonterminal):
+    """
+    Replace SplittedRules by their original rule.
+    :param root: Root of the AST
+    :return: Modified AST
+    """
     items = Traversing.postOrder(root)
     items = filter(lambda x: isinstance(x, Rule), items)
     for i in items:

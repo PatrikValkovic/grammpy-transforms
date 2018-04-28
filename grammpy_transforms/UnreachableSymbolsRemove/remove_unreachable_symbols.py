@@ -11,11 +11,19 @@ from grammpy import Grammar
 from grammpy.exceptions import NotNonterminalException
 from copy import copy
 
+
 class StartSymbolNotSpecifiedException(Exception):
     pass
 
 
 def remove_unreachable_symbols(grammar: Grammar, transform_grammar=False) -> Grammar:
+    """
+    Remove unreachable symbols from the gramar
+    :param grammar: Grammar where to symbols remove
+    :param transform_grammar: True if transformation should be performed in place, false otherwise.
+    False by default.
+    :return: Grammar without unreachable symbols.
+    """
     # Copy if required
     if transform_grammar is False: grammar = copy(grammar)
     # Check if start symbol is set

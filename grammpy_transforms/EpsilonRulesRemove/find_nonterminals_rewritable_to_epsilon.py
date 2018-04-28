@@ -10,7 +10,12 @@ Part of grammpy-transforms
 from grammpy import Grammar, EPSILON
 
 
-def find_nonterminals_rewritable_to_epsilon(grammar: Grammar) -> dict:
+def find_nonterminals_rewritable_to_epsilon(grammar: Grammar):
+    """
+    Get nonterminals rewritable to epsilon.
+    :param grammar: Grammar where to search.
+    :return: Dictionary, where key is nonterminal rewritable to epsilon and value is rule that is responsible for it.
+    """
     rewritable = dict()
     rewritable[EPSILON] = None
     while True:
