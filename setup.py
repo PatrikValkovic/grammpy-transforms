@@ -1,6 +1,12 @@
 from setuptools import setup
 
-v = '1.2.4'
+# read the contents of your README file
+from os import path
+this_directory = path.abspath(path.dirname(__file__))
+with open(path.join(this_directory, 'README.md'), encoding='utf-8') as f:
+    long_description = f.read()
+
+v = '1.2.5'
 
 setup(
     name='grammpy-transforms',
@@ -20,6 +26,8 @@ setup(
     author='Patrik Valkovic',
     author_email='patrik.valkovic@hotmail.cz',
     description='Set of transformations for grammpy library.',
+    long_description=long_description,
+    long_description_content_type='text/markdown',
     install_requires=[
         'grammpy',
     ],

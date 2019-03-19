@@ -1,6 +1,11 @@
 # grammpy-transforms [![Build Status](https://travis-ci.org/PatrikValkovic/grammpy-transforms.svg?branch=master)](https://travis-ci.org/PatrikValkovic/grammpy-transforms) [![Coverage Status](https://coveralls.io/repos/github/PatrikValkovic/grammpy-transforms/badge.svg?branch=master)](https://coveralls.io/github/PatrikValkovic/grammpy-transforms?branch=master)
 
-Version: 1.2.3
+-----
+
+## THIS PACKAGE IS DEPRECATED, USE `grammpy` LIBRARY INSTEAD.
+
+-------
+Version: 1.2.5
 
 Package for transforming grammpy grammars. 
 
@@ -235,9 +240,8 @@ Library should at least support these operations:
 
 -----
 
-Version: dev
+Version: 1.2.5
 
 Author: Patrik Valkovič
 
 Licence: GNU General Public License v3.0
->>>>>>> dev
